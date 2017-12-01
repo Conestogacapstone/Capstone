@@ -7,87 +7,78 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--android:elevation="4dp"-->
-        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
-
-
-
-    <!-- <ListView
-         android:id="@+id/show_data"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentTop="true"
-         android:layout_toStartOf="@+id/button3"
-         android:layout_alignEnd="@+id/button4" /> -->
-    <!--<Button-->
-        <!--android:id="@+id/upload"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="49dp"-->
-        <!--android:layout_below="@+id/imageView"-->
-        <!--android:layout_marginEnd="15dp"-->
-        <!--android:layout_toStartOf="@+id/download"-->
-        <!--android:text="Capture"-->
-        <!--tools:layout_editor_absoluteX="93dp"-->
-        <!--tools:layout_editor_absoluteY="406dp" />-->
+   <!-- <ListView
+        android:id="@+id/show_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/button3"
+        android:layout_alignEnd="@+id/button4" /> -->
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_below="@+id/imageView"
+        android:layout_marginEnd="15dp"
+        android:layout_toStartOf="@+id/download"
+        android:text="Capture"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="406dp" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         app:srcCompat="@drawable/common_full_open_on_phone"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_marginBottom="23dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:text="Back" />
+        android:layout_alignStart="@+id/upload" />
 
-    <!--<Button-->
-        <!--android:id="@+id/button3"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="More Water"-->
-        <!--android:layout_below="@+id/imageView"-->
-        <!--android:layout_alignEnd="@+id/imageView"-->
-        <!--android:layout_marginTop="46dp" />-->
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="More Water"
+        android:layout_below="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView"
+        android:layout_marginTop="46dp" />
 
-    <!--<Button-->
-        <!--android:id="@+id/lesswater"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Less Water"-->
-        <!--android:layout_alignBaseline="@+id/backBtn"-->
-        <!--android:layout_alignBottom="@+id/backBtn"-->
-        <!--android:layout_alignStart="@+id/button3" />-->
+    <Button
+        android:id="@+id/lesswater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Less Water"
+        android:layout_alignBaseline="@+id/backBtn"
+        android:layout_alignBottom="@+id/backBtn"
+        android:layout_alignStart="@+id/button3" />
 
     <Button
         android:id="@+id/sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/bool"
+        android:layout_above="@+id/backBtn"
+        android:layout_alignStart="@+id/backBtn"
+        android:layout_marginBottom="17dp"
         android:text="Sign Out" />
 
-    <!--<Button-->
-        <!--android:id="@+id/download"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/imageView"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="get image" />-->
+    <Button
+        android:id="@+id/download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:text="get image" />
 
     <TextView
         android:id="@+id/bool"
@@ -96,50 +87,5 @@
         android:layout_above="@+id/backBtn"
         android:layout_centerHorizontal="true"
         android:text="TextView" />
-
-    <Button
-        android:id="@+id/history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="history" />
-
-    <Button
-        android:id="@+id/moisture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/history"
-        android:layout_centerVertical="true"
-        android:text="Moisture" />
-
-    <TextView
-        android:id="@+id/rand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_above="@+id/waterOn"
-        android:layout_marginBottom="16dp"
-        android:layout_toStartOf="@+id/imageView"
-        android:text="TextView" />
-
-    <Button
-        android:id="@+id/waterOn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/waterOff"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="12dp"
-        android:layout_toEndOf="@+id/rand"
-        android:text="Tap to Start Watering" />
-
-    <Button
-        android:id="@+id/waterOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bool"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/rand"
-        android:text="Tap to Stop Watering" />
 
 </RelativeLayout>

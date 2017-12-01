@@ -21,7 +21,7 @@ public class Welcome extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             public void run() {
                 finish();
-                Intent intent = new Intent(Welcome.this, Login.class);
+                Intent intent = new Intent(Welcome.this, livePage.class);
                 startActivity(intent);
             }
         }, _splashTime);

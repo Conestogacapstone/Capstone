@@ -14,16 +14,16 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/button3"
         android:layout_alignEnd="@+id/button4" /> -->
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="49dp"
-        android:layout_below="@+id/imageView"
-        android:layout_marginEnd="15dp"
-        android:layout_toStartOf="@+id/download"
-        android:text="Capture"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="406dp" />
+    <!--<Button-->
+        <!--android:id="@+id/upload"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="49dp"-->
+        <!--android:layout_below="@+id/imageView"-->
+        <!--android:layout_marginEnd="15dp"-->
+        <!--android:layout_toStartOf="@+id/download"-->
+        <!--android:text="Capture"-->
+        <!--tools:layout_editor_absoluteX="93dp"-->
+        <!--tools:layout_editor_absoluteY="406dp" />-->
 
     <ImageView
         android:id="@+id/imageView"

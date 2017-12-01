@@ -1,76 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="@color/white">
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white">
 
   <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="0dp"
-    android:layout_width="fill_parent"
-    android:layout_weight="1">
+      android:layout_height="0dp"
+      android:layout_width="fill_parent"
+      android:layout_weight="1">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:padding="8sp"
-      android:orientation="vertical"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content">
-
-      <TextView
-          style="@style/widget"
-        android:text="Title" />
-
-      <EditText
-          style="@style/widget"
-        android:textColor="@color/black"
-        android:id="@+id/title"
-        android:singleLine="true" />
-
-      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:paddingTop="8sp"
-        android:orientation="horizontal"
+        android:padding="8sp"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
+      <TextView
+          style="@style/widget"
+     android:textColor="@android:color/black"
+          android:text="Title" />
+
+      <EditText
+          style="@style/widget"
+          android:textColor="@color/black"
+          android:id="@+id/title"
+          android:singleLine="true" />
+
+      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          android:paddingTop="8sp"
+          android:orientation="horizontal"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content">
+
         <CheckBox
-          android:id="@+id/alarm_checkbox"
-          android:layout_weight="1"
-          android:layout_width="0sp"
-          android:layout_height="wrap_content"
-          android:text="Alarm" />
+            android:id="@+id/alarm_checkbox"
+            android:textColor="@android:color/black"
+
+            android:layout_weight="1"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:text="Alarm" />
 
         <Spinner
-          android:id="@+id/occurence_spinner"
-          android:layout_weight="1"
-          android:layout_width="0sp"
-          android:layout_height="wrap_content"
-          android:spinnerMode="dropdown"
-          android:entries="@array/occurence" />
+            android:id="@+id/occurence_spinner"
+            android:layout_weight="1"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:entries="@array/occurence" />
 
       </LinearLayout>
 
       <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:paddingTop="8sp"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+          android:paddingTop="8sp"
+          android:orientation="horizontal"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content">
 
         <Button
-          android:id="@+id/date_button"
-          android:layout_weight="2"
-          android:layout_width="0sp"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:onClick="onDateClick" />
+            android:id="@+id/date_button"
+            android:layout_weight="2"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="onDateClick" />
 
         <Button
-          android:id="@+id/time_button"
-          android:layout_weight="1"
-          android:layout_width="0sp"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:onClick="onTimeClick" />
+            android:id="@+id/time_button"
+            android:layout_weight="1"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="onTimeClick" />
 
       </LinearLayout>
 
@@ -79,22 +82,22 @@
   </ScrollView>
 
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:padding="8sp"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+      android:orientation="horizontal"
+      android:padding="8sp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content">
 
     <Button
-        style="@style/widget"
-      android:id="@+id/done"
-      android:text="Done"
-      android:onClick="onDoneClick" />
+        style="@style/edit_button"
+        android:id="@+id/done"
+        android:text="Done"
+        android:onClick="onDoneClick" />
 
     <Button
-        style="@style/widget"
-      android:id="@+id/cancel"
-      android:text="Cancel"
-      android:onClick="onCancelClick" />
+        style="@style/edit_button"
+        android:id="@+id/cancel"
+        android:text="Cancel"
+        android:onClick="onCancelClick" />
 
   </LinearLayout>
 

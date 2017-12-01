@@ -18,9 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-/**
- * Created by User on 4/15/2017.
- */
+
 
 public class ActivityOne extends AppCompatActivity  {
 
@@ -30,12 +28,6 @@ public class ActivityOne extends AppCompatActivity  {
     FragmentManager fragmentManager = getSupportFragmentManager();
     android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-    public android.support.v4.app.FragmentTransaction getTransaction() {
-
-        transaction.replace(R.id.content, new myPlants_Fragment()).commit();
-
-        return transaction;
-    }
 
 
     @Override
@@ -45,7 +37,6 @@ public class ActivityOne extends AppCompatActivity  {
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
@@ -59,11 +50,11 @@ public class ActivityOne extends AppCompatActivity  {
                     startActivity(intent0);
 
                 } else if (i == R.id.myPlants) {
-                } else if (i == R.id.reminder) {
+                } /*else if (i == R.id.reminder) {
                     Intent intent2 = new Intent(ActivityOne.this, ActivityTwo.class);
                     startActivity(intent2);
 
-                } else if (i == R.id.settings) {
+                }*/ else if (i == R.id.settings) {
                     Intent intent3 = new Intent(ActivityOne.this, ActivityThree.class);
                     startActivity(intent3);
 

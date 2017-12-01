@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -18,9 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-/**
- * Created by User on 4/15/2017.
- */
+
 
 public class ActivityThree extends AppCompatActivity {
     Toolbar toolbar;
@@ -35,9 +34,8 @@ public class ActivityThree extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(3);
+        MenuItem menuItem = menu.getItem(2);
         menuItem.setChecked(true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -52,18 +50,18 @@ public class ActivityThree extends AppCompatActivity {
                     Intent intent1 = new Intent(ActivityThree.this, ActivityOne.class);
                     startActivity(intent1);
 
-                } else if (i == R.id.reminder) {
+                } /*else if (i == R.id.reminder) {
                     Intent intent2 = new Intent(ActivityThree.this, ActivityTwo.class);
                     startActivity(intent2);
 
-                } else if (i == R.id.settings) {
+                } */else if (i == R.id.settings) {
                 }
 
 
                 return false;
             }
         });
-        String [] menuItems ={"Edit Profile","Add Kit Information","About","C"};
+        String [] menuItems ={"Edit Profile","About","C"};
 
         ListView listView = (ListView) findViewById(R.id.mainMenu);
 
@@ -86,13 +84,13 @@ public class ActivityThree extends AppCompatActivity {
 
 
                 }
-                else if(position == 1)
-                {
-                    Intent intent1 = new Intent(ActivityThree.this, addToDatabase.class);
-                    startActivity(intent1);
-
-
-                }
+//                else if(position == 1)
+//                {
+//                    Intent intent1 = new Intent(ActivityThree.this, addToDatabase.class);
+//                    startActivity(intent1);
+//
+//
+//                }
                 else if(position == 2)
                 {
                     Intent intent2 = new Intent(ActivityThree.this, About.class);
@@ -104,5 +102,7 @@ public class ActivityThree extends AppCompatActivity {
 
             }
         });
+
     }
+
 }

@@ -23,9 +23,7 @@ import android.widget.TextView;
 
 import java.util.prefs.Preferences;
 
-/**
- * Created by User on 4/15/2017.
- */
+
 
 public class ActivityTwo extends AppCompatActivity {
     private final String TAG = "AlarmMe";
@@ -114,35 +112,9 @@ public class ActivityTwo extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("ResourceType")
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.layout.menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        if (R.id.menu_settings == item.getItemId())
-        {
-            Intent intent = new Intent(getBaseContext(), Preferences.class);
-            startActivityForResult(intent, PREFERENCES_ACTIVITY);
-            return true;
-        }
-   /* else if (R.id.menu_about == item.getItemId())
-    {
-      Intent intent = new Intent(getBaseContext(), About.class);
-      startActivity(intent);
-      return true;
-    }*/
-        else
-        {
-            return super.onOptionsItemSelected(item);
-        }
-    }
+
+
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo)

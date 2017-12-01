@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
@@ -51,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent2);
 
 
-                } else if (i == R.id.reminder) {
+                }/* else if (i == R.id.reminder) {
                     Intent intent2 = new Intent(MainActivity.this, ActivityTwo.class);
                     startActivity(intent2);
 
-                } else if (i == R.id.settings) {
+                } */else if (i == R.id.settings) {
                     Intent intent3 = new Intent(MainActivity.this, ActivityThree.class);
                     startActivity(intent3);
 

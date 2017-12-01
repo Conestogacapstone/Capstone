@@ -66,4 +66,6 @@
         <item>180</item>
         <item>300</item>
     </string-array>
+    <string name="title_activity_navigation">Navigation</string>
+
 </resources>

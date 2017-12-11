@@ -180,9 +180,24 @@ public class livePage extends AppCompatActivity {
                 String random = Integer.toString(ran);
                 mtextview.setText(random);
 
-                if(ran > 10)
+                if(ran <= 25)
                 {
-                    mImageView.setImageResource(R.drawable.and);
+                    mImageView.setImageResource(R.drawable.dead);
+
+                }
+               else if(ran <= 50)
+                {
+                    mImageView.setImageResource(R.drawable.unhealthy);
+
+                }
+                else if(ran <= 75)
+                {
+                    mImageView.setImageResource(R.drawable.mhealthy);
+
+                }
+                else if(ran <= 100)
+                {
+                    mImageView.setImageResource(R.drawable.vhealthy);
 
                 }
             }

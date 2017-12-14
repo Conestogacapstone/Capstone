@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.content.Intent;
 
@@ -49,6 +51,7 @@ import android.widget.Toolbar;
 
 import java.net.SocketPermission;
 import java.sql.SQLOutput;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -65,6 +68,7 @@ import static android.R.attr.fragment;
 import static android.R.attr.logo;
 import static android.R.attr.name;
 import static android.R.attr.noHistory;
+import static android.R.attr.start;
 import static android.R.attr.thumbnail;
 
 
@@ -101,6 +105,8 @@ public class livePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_page);
+
+
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
         btnBack = (Button) findViewById(R.id.backBtn);
@@ -150,23 +156,28 @@ public class livePage extends AppCompatActivity {
         };
 
 
-        mhistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                try {
-                    Date currentTime = Calendar.getInstance().getTime();
-
-                     String historyObject = currentTime.toString();
-
-
-                    myRef.child("users").child(userID).child("History").push().setValue(historyObject);
-
-                } catch (Exception e) {
-                    System.out.println("Error " + e);
-                }
-            }
-        });
+//        mhistory.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                try {
+//                    Date currentTime = Calendar.getInstance().getTime();
+//
+//                     final String historyObject = currentTime.toString();
+//
+//
+//                    myRef.child("users").child(userID).child("History").push().setValue(historyObject);
+//
+//                    // System.out.println(historyObject);
+//
+//
+//
+//
+//                } catch (Exception e) {
+//                    System.out.println("Error " + e);
+//                }
+//            }
+//        });
 
         //This function is setting and getting random value from database
         btnmoisture.setOnClickListener(new View.OnClickListener() {
@@ -209,6 +220,30 @@ public class livePage extends AppCompatActivity {
         btnwaterOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                try {
+                  // Date currentTime = Calendar.getInstance().getTime();
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = new Date();
+                  //  System.out.println(formatter.format(date));
+                    SimpleDateFormat formatter1 = new SimpleDateFormat(":HH:mm:ss");
+                    Date date1 = new Date();
+                    //System.out.println(formatter1.format(date1));
+                 //   final String historyObject = currentTime.toString();
+                    final String obj1 = formatter.format(date);
+                    final String obj2 = formatter1.format(date1);
+
+
+                    myRef.child("users").child(userID).child("History").push().setValue(obj1+"  "+"Time"+obj2);
+
+                    // System.out.println(historyObject);
+
+
+
+
+                } catch (Exception e) {
+                    System.out.println("Error " + e);
+                }
 
               int waterOn = 1;
                 myRef.child("users").child(userID).child("status").setValue(waterOn);
@@ -285,12 +320,23 @@ public class livePage extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch(item.getItemId()){
-            case R.id.h:
-            return true;
-            case R.id.m:
+
+                    case R.id.listView:
+                        Intent intent1 = new Intent (livePage.this,history.class);
+                        startActivity(intent1);
+                        return true;
+
+
+                    case R.id.graphView:
+                        Intent intent2 = new Intent (livePage.this,graph.class);
+                        startActivity(intent2);
+                        return true;
+
+            case R.id.reminder:
+                Intent intent3 = new Intent(livePage.this, ActivityTwo.class);
+                startActivity(intent3);
                 return true;
-            case R.id.s:
-                return true;
+
                 default:
                     return super.onOptionsItemSelected(item);
         }

@@ -20,7 +20,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Live Streaming"
+            android:text="Let's Go"
             android:layout_marginTop="157dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
@@ -29,7 +29,7 @@
             android:id="@+id/livestreamBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Live Streaming"
+            android:text="Click to proceed"
             android:layout_below="@+id/textView3"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="104dp" />

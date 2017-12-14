@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import java.util.prefs.Preferences;
 public class ActivityTwo extends AppCompatActivity {
     private final String TAG = "AlarmMe";
 
+
     private ListView mAlarmList;
     private AlarmListAdapter mAlarmListAdapter;
     private Alarm mCurrentAlarm;
@@ -37,14 +39,19 @@ public class ActivityTwo extends AppCompatActivity {
     private final int PREFERENCES_ACTIVITY = 2;
     private final int ABOUT_ACTIVITY = 3;
 
+
+
     private final int CONTEXT_MENU_EDIT = 0;
     private final int CONTEXT_MENU_DELETE = 1;
     private final int CONTEXT_MENU_DUPLICATE = 2;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
 
 
         Log.i(TAG, "AlarmMe.onCreate()");
@@ -53,10 +60,11 @@ public class ActivityTwo extends AppCompatActivity {
 
         mAlarmListAdapter = new AlarmListAdapter(this);
         mAlarmList.setAdapter(mAlarmListAdapter);
-        mAlarmList.setOnItemClickListener(mListOnItemClickListener);
+       mAlarmList.setOnItemClickListener(mListOnItemClickListener);
         registerForContextMenu(mAlarmList);
 
         mCurrentAlarm = null;
+
     }
 
     @Override
@@ -85,6 +93,12 @@ public class ActivityTwo extends AppCompatActivity {
         ActivityTwo.this.startActivityForResult(intent, NEW_ALARM_ACTIVITY);
     }
 
+
+
+
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -97,7 +111,7 @@ public class ActivityTwo extends AppCompatActivity {
             }
             mCurrentAlarm = null;
         }
-        else if (requestCode == EDIT_ALARM_ACTIVITY)
+      else  if (requestCode == EDIT_ALARM_ACTIVITY)
         {
             if (resultCode == RESULT_OK)
             {
@@ -106,11 +120,11 @@ public class ActivityTwo extends AppCompatActivity {
             }
             mCurrentAlarm = null;
         }
-        else if (requestCode == PREFERENCES_ACTIVITY)
-        {
-            mAlarmListAdapter.onSettingsUpdated();
-        }
-    }
+//        else if (requestCode == PREFERENCES_ACTIVITY)
+//        {
+//            mAlarmListAdapter.onSettingsUpdated();
+//        }
+   }
 
 
 
@@ -131,7 +145,7 @@ public class ActivityTwo extends AppCompatActivity {
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item)
+    public boolean onContextItemSelected(final MenuItem item)
     {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         int index = item.getItemId();
@@ -146,7 +160,8 @@ public class ActivityTwo extends AppCompatActivity {
         }
         else if (index == CONTEXT_MENU_DELETE)
         {
-            mAlarmListAdapter.delete(info.position);
+    mAlarmListAdapter.delete(info.position);
+
         }
         else if (index == CONTEXT_MENU_DUPLICATE)
         {

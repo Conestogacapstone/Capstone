@@ -1,17 +1,23 @@
 
-
 package com.example.android.capstone_project;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.view.LayoutInflater;
+import android.content.Intent;
+import android.content.Context;
 import android.widget.TextView;
+import android.widget.BaseAdapter;
+import android.widget.Toast;
+
+import com.example.android.capstone_project.Alarm;
+import com.example.android.capstone_project.AlarmReceiver;
+import com.example.android.capstone_project.DataSource;
+import com.example.android.capstone_project.DateTime;
+import com.example.android.capstone_project.R;
 
 class AlarmListAdapter extends BaseAdapter
 {
@@ -75,12 +81,6 @@ class AlarmListAdapter extends BaseAdapter
     dataSetChanged();
   }
 
-  public void onSettingsUpdated()
-  {
-    mDateTime.update();
-    dataSetChanged();
-  }
-
   public int getCount()
   {
     return mDataSource.size();
@@ -100,7 +100,7 @@ class AlarmListAdapter extends BaseAdapter
   {
     ViewHolder holder;
     Alarm alarm = mDataSource.get(position);
-
+//holder used to get views of list
     if (convertView == null)
     {
       convertView = mInflater.inflate(R.layout.list_item, null);
@@ -115,7 +115,7 @@ class AlarmListAdapter extends BaseAdapter
     {
       holder = (ViewHolder)convertView.getTag();
     }
-
+// holder used for setting list view of alarms
     holder.title.setText(alarm.getTitle());
     holder.details.setText(mDateTime.formatDetails(alarm) + (alarm.getEnabled() ? "" : " [disabled]"));
 
@@ -134,7 +134,7 @@ class AlarmListAdapter extends BaseAdapter
 
     notifyDataSetChanged();
   }
-
+  //Setting alarm
   private void setAlarm(Alarm alarm)
   {
     PendingIntent sender;
@@ -149,7 +149,7 @@ class AlarmListAdapter extends BaseAdapter
       Log.i(TAG, "AlarmListAdapter.setAlarm(" + alarm.getId() + ", '" + alarm.getTitle() + "', " + alarm.getDate()+")");
     }
   }
-
+  //To cancel alarm and using intent to alaram receiver class
   private void cancelAlarm(Alarm alarm)
   {
     PendingIntent sender;

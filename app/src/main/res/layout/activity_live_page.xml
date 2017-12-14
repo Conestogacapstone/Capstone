@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="com.example.android.capstone_project.livePage">
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,78 +15,96 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/button3"
         android:layout_alignEnd="@+id/button4" /> -->
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="49dp"
-        android:layout_below="@+id/imageView"
-        android:layout_marginEnd="15dp"
-        android:layout_toStartOf="@+id/download"
-        android:text="Capture"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="406dp" />
+
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="350dp"
-        app:srcCompat="@drawable/common_full_open_on_phone"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp"
-        android:layout_marginTop="14dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:alpha="1"
+        app:srcCompat="@drawable/common_full_open_on_phone"
+        />
+
+
+    <Button
+        android:id="@+id/moisture"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_alignBottom="@+id/waterOn"
+        android:layout_alignStart="@+id/textView4"
+        android:text="Soil Humidity"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="406dp" />
 
     <Button
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:layout_marginBottom="23dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/upload" />
+        android:layout_alignStart="@+id/textView4"
+        android:layout_marginBottom="29dp"
+        android:text="Back" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/waterOn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="More Water"
-        android:layout_below="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView"
-        android:layout_marginTop="46dp" />
+        android:layout_above="@+id/waterOff"
+        android:layout_alignEnd="@+id/waterOff"
+        android:layout_alignStart="@+id/waterOff"
+        android:layout_marginBottom="21dp"
+        android:text="Tap to Water" />
 
     <Button
-        android:id="@+id/lesswater"
+        android:id="@+id/waterOff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Less Water"
-        android:layout_alignBaseline="@+id/backBtn"
-        android:layout_alignBottom="@+id/backBtn"
-        android:layout_alignStart="@+id/button3" />
+        android:layout_above="@+id/backBtn"
+        android:layout_alignEnd="@+id/sign_out"
+        android:layout_marginBottom="43dp"
+        android:text="Tap to Stop Water" />
 
     <Button
         android:id="@+id/sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/backBtn"
-        android:layout_alignStart="@+id/backBtn"
-        android:layout_marginBottom="17dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/waterOff"
+        android:layout_marginEnd="11dp"
         android:text="Sign Out" />
 
-    <Button
-        android:id="@+id/download"
+    <TextView
+        android:id="@+id/rand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:text="get image" />
+
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_toEndOf="@+id/backBtn"
+        android:text="54"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="406dp" />
 
     <TextView
-        android:id="@+id/bool"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/backBtn"
-        android:layout_centerHorizontal="true"
-        android:text="TextView" />
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/waterOff"
+        android:layout_marginStart="12dp"
+        android:text="Humidity:" />
+
+
+    <!--<Button-->
+        <!--android:id="@+id/history"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_above="@+id/sign_out"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="14dp"-->
+        <!--android:text="History" />-->
 
 </RelativeLayout>

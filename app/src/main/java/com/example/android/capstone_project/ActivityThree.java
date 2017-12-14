@@ -7,18 +7,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Toolbar;
-
 
 
 public class ActivityThree extends AppCompatActivity {
@@ -91,7 +85,7 @@ public class ActivityThree extends AppCompatActivity {
 //
 //
 //                }
-                else if(position == 2)
+                else if(position == 1)
                 {
                     Intent intent2 = new Intent(ActivityThree.this, About.class);
                     startActivity(intent2);

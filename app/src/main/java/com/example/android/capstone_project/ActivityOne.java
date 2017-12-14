@@ -1,6 +1,5 @@
 package com.example.android.capstone_project;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,20 +13,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 
+public class ActivityOne extends AppCompatActivity {
 
-public class ActivityOne extends AppCompatActivity  {
-
-    Toolbar toolbar;
-    ListView listview;
-
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-
+//    Toolbar toolbar;
+//    ListView listview;
+//
+//    FragmentManager fragmentManager = getSupportFragmentManager();
+//    android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 
 
     @Override
@@ -61,17 +57,16 @@ public class ActivityOne extends AppCompatActivity  {
                 }
 
 
-
                 return false;
             }
         });
 
-        String [] menuItems ={"A","B","C"};
+        String[] menuItems = {"A", "B", "C"};
 
         ListView listView = (ListView) findViewById(R.id.mainMenu);
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
-               ActivityOne.this,
+                ActivityOne.this,
                 android.R.layout.simple_list_item_1,
                 menuItems
         );
@@ -82,15 +77,13 @@ public class ActivityOne extends AppCompatActivity  {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position == 0){
+                if (position == 0) {
                     Intent intent2 = new Intent(ActivityOne.this, plant1.class);
                     startActivity(intent2);
 
 
-                }
-                else if(position == 1)
-                {
-                    Toast.makeText(ActivityOne.this,"yes",Toast.LENGTH_SHORT).show();
+                } else if (position == 1) {
+                    Toast.makeText(ActivityOne.this, "yes", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -99,4 +92,5 @@ public class ActivityOne extends AppCompatActivity  {
             }
         });
     }
+
 }

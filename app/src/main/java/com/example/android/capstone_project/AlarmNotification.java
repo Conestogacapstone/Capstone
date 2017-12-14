@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -38,7 +37,7 @@ public class AlarmNotification extends Activity
   private Alarm mAlarm;
   private DateTime mDateTime;
   private TextView mTextView;
-  private PlayTimerTask mTimerTask;
+
 
   @Override
   protected void onCreate(Bundle bundle)
@@ -78,9 +77,6 @@ public class AlarmNotification extends Activity
   {
     super.onNewIntent(intent);
     Log.i(TAG, "AlarmNotification.onNewIntent()");
-
-    addNotification(mAlarm);
-
     stop();
     start(intent);
   }
@@ -89,14 +85,9 @@ public class AlarmNotification extends Activity
   {
     mAlarm = new Alarm(this);
     mAlarm.fromIntent(intent);
-
     Log.i(TAG, "AlarmNotification.start('" + mAlarm.getTitle() + "')");
-
     mTextView.setText(mAlarm.getTitle());
-
-    mTimerTask = new PlayTimerTask();
     mTimer = new Timer();
-    mTimer.schedule(mTimerTask, mPlayTime);
     mRingtone.play();
     if (mVibrate)
       mVibrator.vibrate(mVibratePattern, 0);
@@ -126,47 +117,5 @@ public class AlarmNotification extends Activity
     mPlayTime = (long) Integer.parseInt(prefs.getString("alarm_play_time_pref", "30")) * 1000;
   }
 
-  private void addNotification(Alarm alarm)
-  {
-    NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-    Notification notification;
-    PendingIntent activity;
-    Intent intent;
-
-    Log.i(TAG, "AlarmNotification.addNotification(" + alarm.getId() + ", '" + alarm.getTitle() + "', '" + mDateTime.formatDetails(alarm) + "')");
-
-    intent = new Intent(this.getApplicationContext(), ActivityTwo.class);
-    intent.setAction(Intent.ACTION_MAIN);
-    intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-    activity = PendingIntent.getActivity(this, (int)alarm.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-    NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-    notification = builder
-        .setContentIntent(activity)
-        .setAutoCancel(true)
-        .setContentTitle("Missed alarm: " + alarm.getTitle())
-        .setContentText(mDateTime.formatDetails(alarm))
-        .build();
-
-    notificationManager.notify((int)alarm.getId(), notification);
-  }
-
-  @Override
-  public void onBackPressed()
-  {
-    finish();
-  }
-
-  private class PlayTimerTask extends TimerTask
-  {
-    @Override
-    public void run()
-    {
-      Log.i(TAG, "AlarmNotification.PalyTimerTask.run()");
-      addNotification(mAlarm);
-      finish();
-    }
-  }
 }
 

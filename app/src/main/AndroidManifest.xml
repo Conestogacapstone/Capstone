@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Welcome">
+        <activity android:name=".Activities.Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,23 +24,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/title_activity_main" />
-        <activity android:name=".signUp" />
-        <activity android:name=".resetPassword" />
+        <activity android:name=".Authenticator.signUp" />
+        <activity android:name=".Data.resetPassword" />
         <!-- <activity -->
         <!-- android:name=".logIn" -->
         <!-- /> -->
-        <activity android:name=".Login" />
-        <activity android:name=".myProfile" />
-        <activity android:name=".viewUser" />
-        <activity android:name=".ActivityOne" />
+        <activity android:name=".Authenticator.Login" />
+        <activity android:name=".Data.myProfile" />
+        <activity android:name=".Data.viewUser" />
+        <activity android:name=".Activities.ActivityOne" />
         <activity android:name=".ActivityTwo" />
-        <activity android:name=".ActivityThree" />
+        <activity android:name=".Activities.ActivityThree" />
         <activity android:name=".AlarmNotification" />
-        <activity android:name=".livePage" />
-        <activity android:name=".plant1" />
-        <activity android:name=".ActivityOne$About" />
+        <activity android:name=".Model.livePage" />
+        <activity android:name=".Activities.plant1" />
+        <activity android:name=".Activities.ActivityOne$About" />
         <activity
             android:name=".EditAlarm"
             android:label="Edit alarm" />
@@ -49,9 +49,9 @@
             android:name=".AlarmReceiver"
             android:process=":remote" />
 
-        <activity android:name=".history" />
-        <activity android:name=".graph" />
-        <activity android:name=".About"></activity>
+        <activity android:name=".Data.history" />
+        <activity android:name=".Data.graph" />
+        <activity android:name=".Activities.About"></activity>
     </application>
 
 </manifest>

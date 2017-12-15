@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.android.capstone_project.viewUser"
+    tools:context="com.example.android.capstone_project.Data.viewUser"
     android:weightSum="1">
 
     <ImageView

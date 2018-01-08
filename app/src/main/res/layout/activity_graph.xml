@@ -6,13 +6,56 @@
     android:layout_height="match_parent"
     tools:context="com.example.android.capstone_project.Data.graph">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph"
-        android:layout_width="300dip"
-        android:layout_height="400dip"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="350dip"
+            android:layout_height="300dip"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="18dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="Click on triangle to see moisture level on particular date"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/graph"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="125dp"
+            android:rotation="-90"
+            android:text="Date"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignEnd="@+id/graph"
+            android:layout_below="@+id/graph"
+            android:layout_marginEnd="95dp"
+            android:text="Moisture Level"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

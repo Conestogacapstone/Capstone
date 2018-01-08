@@ -12,24 +12,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.android.capstone_project.R;
 
 
 public class ActivityOne extends AppCompatActivity {
 
-//    Toolbar toolbar;
-//    ListView listview;
-//
-//    FragmentManager fragmentManager = getSupportFragmentManager();
-//    android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one);
+
+
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
@@ -46,11 +41,7 @@ public class ActivityOne extends AppCompatActivity {
                     startActivity(intent0);
 
                 } else if (i == R.id.myPlants) {
-                } /*else if (i == R.id.reminder) {
-                    Intent intent2 = new Intent(ActivityOne.this, ActivityTwo.class);
-                    startActivity(intent2);
-
-                }*/ else if (i == R.id.settings) {
+                } else if (i == R.id.settings) {
                     Intent intent3 = new Intent(ActivityOne.this, ActivityThree.class);
                     startActivity(intent3);
 
@@ -61,7 +52,8 @@ public class ActivityOne extends AppCompatActivity {
             }
         });
 
-        String[] menuItems = {"A", "B", "C"};
+        String[] menuItems = {"Adromischus cooperi", "Aeonium", "Aloe Vera","Avocado","Basil","Black orchid","Bush lily","Cacao","Cardamom","Cattleya-orchid","Lavender lady",
+                "Mophead","Petunia calibrachoa","Rose","Viola",""};
 
         ListView listView = (ListView) findViewById(R.id.mainMenu);
 
@@ -83,8 +75,73 @@ public class ActivityOne extends AppCompatActivity {
 
 
                 } else if (position == 1) {
-                    Toast.makeText(ActivityOne.this, "yes", Toast.LENGTH_SHORT).show();
+                    Intent intent2 = new Intent(ActivityOne.this, plant2.class);
+                    startActivity(intent2);
 
+                }
+                else if (position == 2) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant3.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 3) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant4.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 4) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant5.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 5) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant6.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 6) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant7.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 7) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant8.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 8) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant9.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 9) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant10.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 10) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant11.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 11) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant12.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 12) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant13.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 13) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant14.class);
+                    startActivity(intent2);
+
+                }
+                else if (position == 14) {
+                    Intent intent2 = new Intent(ActivityOne.this, plant15.class);
+                    startActivity(intent2);
 
                 }
 

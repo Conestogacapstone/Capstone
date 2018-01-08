@@ -53,14 +53,14 @@ public class viewUser extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                Log.d("MainActivity", "onAuthStateChanged");
+                Log.d("ActivityTwo", "onAuthStateChanged");
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     setDataToView(user);
 
                     //loading image by Picasso
                     if (user.getPhotoUrl() != null) {
-                        Log.d("MainActivity", "photoURL: " + user.getPhotoUrl());
+                        Log.d("ActivityTwo", "photoURL: " + user.getPhotoUrl());
                        // Picasso.with(viewUser.this).load(user.getPhotoUrl()).into(imageView);
                     }
                 } else {

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.android.capstone_project.Data.viewUser"
-    android:weightSum="1">
+    android:weightSum="1"
+    tools:context="com.example.android.capstone_project.Data.viewUser">
 
     <ImageView
         android:id="@+id/user_photo"
@@ -18,53 +18,52 @@
 
     <TextView
         android:id="@+id/user_id"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin" />
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/email_field"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin" />
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/displayed_name"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin" />
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:textStyle="bold" />
 
 
     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:weightSum="1">
+        android:weightSum="1">
 
-    <Button
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:background="#A9A9A9"
-        android:text="Back" />
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#A9A9A9"
+            android:text="Back"
+            android:textColor="@android:color/white" />
 
 
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="130dp"
-        android:textColor="@android:color/white"
-        android:background="#A9A9A9"
-        android:text="LogOut"
-        android:layout_marginStart="147dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="130dp"
+            android:layout_marginStart="147dp"
+            android:background="#A9A9A9"
+            android:text="LogOut"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 
 </LinearLayout>

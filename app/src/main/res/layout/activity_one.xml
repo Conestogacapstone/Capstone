@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.capstone_project.Activities.MainActivity">
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -17,9 +17,10 @@
 
 
         <ListView
+            android:id="@+id/mainMenu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/mainMenu"/>
+            android:background="@color/black" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -27,14 +28,13 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/topBar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/topBar">
+            android:layout_height="50dp">
 
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
 
 
             </android.support.design.widget.AppBarLayout>
@@ -42,39 +42,34 @@
         </RelativeLayout>
 
 
-
-
         <RelativeLayout
-            android:layout_below="@+id/topBar"
-            android:layout_above="@+id/bottomBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
+            android:layout_above="@+id/bottomBar"
+            android:layout_below="@+id/topBar">
 
             <TextView
+                android:id="@+id/activityTitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
-                android:textSize="30sp"
-                android:id="@+id/activityTitle1"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="30sp" />
 
         </RelativeLayout>
 
 
-
-
-
         <RelativeLayout
+            android:id="@+id/bottomBar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/bottomBar"
             android:layout_alignParentBottom="true">
 
             <android.support.design.widget.BottomNavigationView
+                android:id="@+id/bottomNavView_Bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/bottomNavView_Bar"
+                android:background="#669900"
 
                 app:menu="@menu/bottom_navigation_menu">
 
@@ -83,20 +78,7 @@
         </RelativeLayout>
 
 
-
     </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </android.support.design.widget.CoordinatorLayout>

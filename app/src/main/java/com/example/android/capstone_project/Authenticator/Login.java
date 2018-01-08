@@ -26,18 +26,28 @@ public class Login extends AppCompatActivity {
     private ProgressBar progressBar;
     private Button btnSignup, btnLogin, btnReset;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
 
+        if (auth.getCurrentUser() != null) {
+
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            toastMessage("Successfully signed in with: " + auth.getCurrentUser().getEmail());
+
+        }
+
 
         // set the view now
         setContentView(R.layout.activity_login);
-
 
 
         inputEmail = (EditText) findViewById(R.id.email);
@@ -50,6 +60,8 @@ public class Login extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
+
+        //Signup button to move to registration page
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +76,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //Login button
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +95,7 @@ public class Login extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
+
                 //authenticate user
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
@@ -98,7 +112,9 @@ public class Login extends AppCompatActivity {
                                     } else {
                                         Toast.makeText(Login.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
-                                } else {
+                                }
+                                else {
+
                                     Intent intent = new Intent(Login.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -108,4 +124,9 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
+    private void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
 }

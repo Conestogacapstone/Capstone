@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ba"
+    android:label="@string/app_name"
     tools:context="com.example.android.capstone_project.Activities.MainActivity">
-
-
-
 
 
     <RelativeLayout
@@ -20,39 +18,35 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="44dp"
             android:text="Let's Go"
-            android:layout_marginTop="157dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:textColor="#336600"
+            android:textSize="25dp" />
 
         <Button
             android:id="@+id/livestreamBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Click to proceed"
-            android:layout_below="@+id/textView3"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="104dp" />
-
-
-
-
-
-
-
-
+            android:layout_centerVertical="true"
+            android:background="#D4E157"
+            android:text="Click to proceed"
+            android:textColor="@color/black" />
 
 
         <RelativeLayout
+            android:id="@+id/bottomBar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/bottomBar"
             android:layout_alignParentBottom="true">
 
             <android.support.design.widget.BottomNavigationView
+                android:id="@+id/bottomNavView_Bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/bottomNavView_Bar"
+                android:background="#669900"
 
                 app:menu="@menu/bottom_navigation_menu">
 
@@ -61,6 +55,7 @@
         </RelativeLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -71,17 +66,6 @@
 
 
     </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
 
 
 </android.support.design.widget.CoordinatorLayout>

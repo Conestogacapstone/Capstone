@@ -28,8 +28,7 @@ public class ActivityThree extends AppCompatActivity {
         setContentView(R.layout.activity_three);
 
 
-
-
+        //Bottom Navigation Bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(2);
@@ -47,49 +46,43 @@ public class ActivityThree extends AppCompatActivity {
                     Intent intent1 = new Intent(ActivityThree.this, ActivityOne.class);
                     startActivity(intent1);
 
-                } /*else if (i == R.id.reminder) {
-                    Intent intent2 = new Intent(ActivityThree.this, ActivityTwo.class);
-                    startActivity(intent2);
-
-                } */else if (i == R.id.settings) {
+                } else if (i == R.id.settings) {
                 }
 
 
                 return false;
             }
         });
-        String [] menuItems ={"Edit Profile","About","C"};
+        //String array to store menu items
+        String[] menuItems = {"Edit Profile", "About"};
 
-        ListView listView = (ListView) findViewById(R.id.mainMenu);
 
+        //List view created
+        final ListView listView = (ListView) findViewById(R.id.mainMenu);
+
+
+        //Array adapter to hold listview
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
                 ActivityThree.this,
                 android.R.layout.simple_list_item_1,
                 menuItems
+
         );
 
         listView.setAdapter(listViewAdapter);
 
 
+        //List view conditions
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position == 0){
+                if (position == 0) {
                     Intent intent0 = new Intent(ActivityThree.this, myProfile.class);
                     startActivity(intent0);
 
 
-                }
-//                else if(position == 1)
-//                {
-//                    Intent intent1 = new Intent(ActivityThree.this, addToDatabase.class);
-//                    startActivity(intent1);
-//
-//
-//                }
-                else if(position == 1)
-                {
+                } else if (position == 1) {
                     Intent intent2 = new Intent(ActivityThree.this, About.class);
                     startActivity(intent2);
 

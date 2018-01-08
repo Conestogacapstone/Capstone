@@ -17,14 +17,26 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.Ref;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
+
+import cz.msebera.android.httpclient.Header;
 
 public class history extends AppCompatActivity {
     private static final String TAG = "ViewDatabase";
@@ -53,6 +65,11 @@ public class history extends AppCompatActivity {
 
          mlistview = (ListView) findViewById(R.id.historyList);
         mdel = (Button) findViewById(R.id.del);
+
+        // Add back button
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -85,34 +102,22 @@ public class history extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshots) {
                     //getting value to a string 'sta'
                     String sta = ds.getValue().toString();
+                    String date=sta.substring(0,10);
+                    String del=sta.substring(0,2);
+                    int del1 = Integer.parseInt(del);
+                    System.out.println("delete data"+ del);
+                    System.out.println("date"+date);
+                    String time=sta.substring(10,20);
+                    System.out.println(time);
+                    String humidity=sta.substring(23,45);
                   //  System.out.println(sta);
 
                     String [] parts = sta.split("-");
                     String part1=parts[0];
-//                    try {
-//                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-//                    try {
-//                        Date date = sdf.parse(sta);
-//                        Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
-//                        calendar.setTime(date);   // assigns calendar to given date
-//                        int hour = calendar.get(Calendar.HOUR);
-//                        int minute;
-//                        System.out.println(hour);
-//
-//
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
-//                    }
-//                    catch (Exception e)
-//                    {
-//                        System.out.println(e);
-//
-//                    }
 
                     //Array list used
                   //  ArrayList<String> array  = new ArrayList<>();
-                    mHistory.add("Date-"+sta);
+                    mHistory.add("Date-"+date+"             "+humidity+"\n"+time+"\n");
                    // mHistory.add(sta1);
                    // System.out.println(array);
                     adapter.notifyDataSetChanged();
@@ -120,6 +125,15 @@ public class history extends AppCompatActivity {
                     mlistview.setAdapter(adapter);
 
 
+
+                    if(del1 == 01)
+                    {
+                        dataSnapshot.getRef().removeValue();
+                        finish();
+                        startActivity(getIntent());
+
+
+                    }
 
 
                 }
@@ -136,7 +150,26 @@ public class history extends AppCompatActivity {
 
 
                     }
+
                 });
+
+//                Date cutoff = new Date();
+//                Query oldItems = myRef.orderByChild("timestamp").endAt(String.valueOf(cutoff));
+//                oldItems.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    // Iterable used for "For loop" for any data type
+//                    Iterable<DataSnapshot> dataSnapshots =  dataSnapshot.getChildren();
+//                    @Override
+//                    public void onDataChange(DataSnapshot snapshot) {
+//                        for (DataSnapshot ds : dataSnapshots) {
+//                            dataSnapshot.getRef().removeValue();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        throw databaseError.toException();
+//                    }
+//                });
 
 
             }
@@ -185,6 +218,9 @@ public class history extends AppCompatActivity {
 //
 //            }
 //        });
+
+
+
 
     }
 

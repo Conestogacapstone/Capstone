@@ -11,9 +11,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.Welcome">
@@ -25,33 +25,147 @@
         </activity>
         <activity
             android:name=".Activities.MainActivity"
-            android:label="@string/title_activity_main" />
-        <activity android:name=".Authenticator.signUp" />
-        <activity android:name=".Data.resetPassword" />
-        <!-- <activity -->
-        <!-- android:name=".logIn" -->
-        <!-- /> -->
-        <activity android:name=".Authenticator.Login" />
-        <activity android:name=".Data.myProfile" />
-        <activity android:name=".Data.viewUser" />
-        <activity android:name=".Activities.ActivityOne" />
-        <activity android:name=".ActivityTwo" />
-        <activity android:name=".Activities.ActivityThree" />
-        <activity android:name=".AlarmNotification" />
-        <activity android:name=".Model.livePage" />
-        <activity android:name=".Activities.plant1" />
-        <activity android:name=".Activities.ActivityOne$About" />
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".EditAlarm"
-            android:label="Edit alarm" />
+            android:name=".Activities.ActivityTwo"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Model.livePage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authenticator.signUp"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Data.resetPassword"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
 
-        <receiver
-            android:name=".AlarmReceiver"
-            android:process=":remote" />
+        <activity
+            android:name=".Authenticator.Login"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Data.myProfile"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityThree"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Data.viewUser"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityOne"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityThree"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Model.livePage"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant1"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant2"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant3"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant4"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant5"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant6"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant7"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant8"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant9"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant10"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant11"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant12"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant13"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant14"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.plant15"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Activities.ActivityOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.About"
+            android:parentActivityName=".Activities.ActivityThree" />
 
-        <activity android:name=".Data.history" />
-        <activity android:name=".Data.graph" />
-        <activity android:name=".Activities.About"></activity>
+        <activity
+            android:name=".Data.history"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Model.livePage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Data.graph"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".Model.livePage"
+            android:screenOrientation="portrait" />
+
+
+
+        <receiver android:name=".Activities.ReminderReceiver" />
+
+        <service android:name=".Activities.start_ringtone"
+            android:enabled="true">
+        </service>
+
     </application>
 
 </manifest>

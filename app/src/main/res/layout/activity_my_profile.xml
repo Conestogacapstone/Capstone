@@ -7,22 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.android.capstone_project.Data.myProfile">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimaryDark"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,11 +65,12 @@
             style="?android:textAppearanceSmall"
 
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="#A9A9A9"
+            android:background="#D4E157"
             android:text="@string/btn_change"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <Button
@@ -95,9 +80,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="#A9A9A9"
+            android:background="#D4E157"
             android:text="@string/btn_change"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
 
@@ -111,47 +96,50 @@
             android:id="@+id/remove"
             style="?android:textAppearanceSmall"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
+
             android:layout_marginTop="16dp"
-            android:background="#A9A9A9"
+
+            android:background="#D4E157"
             android:text="@string/btn_remove"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/change_email_button"
             style="?android:textAppearanceSmall"
-            android:background="#A9A9A9"
             android:layout_width="match_parent"
-            android:textColor="@android:color/white"
+
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:background="#D4E157"
             android:text="@string/change_email"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/change_password_button"
-            android:background="#A9A9A9"
             style="?android:textAppearanceSmall"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
             android:layout_marginTop="16dp"
+            android:background="#D4E157"
             android:text="@string/change_password"
+            android:textColor="@color/black"
             android:textStyle="bold" />
-
 
 
         <Button
             android:id="@+id/remove_user_button"
-            android:background="#A9A9A9"
             style="?android:textAppearanceSmall"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
             android:layout_marginTop="16dp"
+            android:background="#D4E157"
             android:text="@string/remove_user"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <Button
@@ -161,9 +149,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="#A9A9A9"
+            android:background="#D4E157"
+
             android:text="viewUser"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <Button
@@ -173,20 +162,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="#A9A9A9"
+            android:background="#D4E157"
+
             android:text="LOGOUT"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textStyle="bold" />
-        <Button
-            android:id="@+id/back"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="#A9A9A9"
-            android:text="BACK"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+
 
     </LinearLayout>
 

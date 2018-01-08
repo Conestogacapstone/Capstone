@@ -35,9 +35,27 @@ dependencies {
     compile 'com.google.firebase:firebase-storage:10.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.firebaseui:firebase-ui-storage:0.6.0'
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.9'
     testCompile 'junit:junit:4.12'
     implementation files('libs/GraphView-4.2.1.jar')
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

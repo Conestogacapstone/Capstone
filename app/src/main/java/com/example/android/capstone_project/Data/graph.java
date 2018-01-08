@@ -20,9 +20,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.PointsGraphSeries;
+import com.jjoe64.graphview.series.Series;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -30,6 +34,7 @@ import java.util.ArrayList;
 
 public class graph extends AppCompatActivity {
     PointsGraphSeries<DataPoint> series;
+    PointsGraphSeries<DataPoint> onClickSeries;
     int a;
     int b;
 
@@ -48,7 +53,6 @@ public class graph extends AppCompatActivity {
     private ArrayList<Integer> yAxis = new ArrayList<>();
 
 
-
     String userID;
 
     @Override
@@ -65,8 +69,12 @@ public class graph extends AppCompatActivity {
         userID = user.getUid();
         mgraph = (GraphView) findViewById(R.id.graph);
 
+        // Add back button
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-//
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -85,7 +93,6 @@ public class graph extends AppCompatActivity {
         };
 
 
-        // System.out.println(historyObject);
         myRef.child("users").child(userID).child("History").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
@@ -98,27 +105,24 @@ public class graph extends AppCompatActivity {
 
                     String[] parts = sta.split("/");
                     String part1 = parts[0];
-                    System.out.println("date"+part1);
+                    System.out.println("date" + part1);
 
-                    String [] part = sta.split(":");
-                    String part2 = part[1];
-                    System.out.println("time"+part2);
+                    String humidity = sta.substring(40, 45);
+                    System.out.println("humidity level" + humidity);
 
 
                     try {
 
 
-                        a = NumberFormat.getInstance().parse(part1).intValue();
-                        //System.out.println("log value" + a);
+                        a = NumberFormat.getInstance().parse(humidity).intValue();
+
                         xAxis.add(a);
-                      //  System.out.println("Arraylist" + xAxis);
 
 
-                        b = NumberFormat.getInstance().parse(part2).intValue();
+                        b = NumberFormat.getInstance().parse(part1).intValue();
                         yAxis.add(b);
 
 
-                        //System.out.println(i);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -129,18 +133,72 @@ public class graph extends AppCompatActivity {
                         DataPoint v = new DataPoint(xAxis.get(i), yAxis.get(i));
                         values[i] = v;
                     }
-                   // System.out.println("Data values-----" + values);
+
+
                     series = new PointsGraphSeries<DataPoint>(values);
-                    series.setColor(Color.GREEN);
-                    GridLabelRenderer gridLabel = mgraph.getGridLabelRenderer();
-                    gridLabel.setHorizontalAxisTitle("Date");
-                    gridLabel.setVerticalAxisTitle("Time in Hours");
-//
-//                    LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-//                            new DataPoint(xAxis.get(0),yAxis.get(0))
-//                    });
-                    mgraph.addSeries(series);
+
+
                 }
+                createScatterPlot();
+
+            }
+
+
+            private void createScatterPlot() {
+
+                Log.d(TAG, "createScatterPlot: Creating scatter plot.");
+
+
+                series.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPointInterface) {
+
+                        Log.d(TAG, "onTap: You clicked on: (" + dataPointInterface.getX() + "," + dataPointInterface.getY() + ")");
+
+                        //declare new series
+                        onClickSeries = new PointsGraphSeries<>();
+
+                        onClickSeries.appendData(new DataPoint(dataPointInterface.getX(), dataPointInterface.getY()), true, 100);
+
+                        onClickSeries.setShape(PointsGraphSeries.Shape.TRIANGLE);
+                        onClickSeries.setColor(Color.RED);
+                        onClickSeries.setSize(25f);
+                        // mgraph.addSeries(onClickSeries);
+
+                        double date = dataPointInterface.getY();
+                        String date1 = Double.toString(date);
+                        String date2 = date1.substring(0, 2);
+
+                        mgraph.removeAllSeries();
+                        mgraph.addSeries(onClickSeries);
+                        toastMessage("Moisture Level:  " + dataPointInterface.getX() + "\n" + "Date Of Month:  " + date2);
+                        createScatterPlot();
+
+                    }
+                });
+
+
+                series.setShape(PointsGraphSeries.Shape.TRIANGLE);
+                series.setColor(Color.GREEN);
+
+                // set manual X bounds
+                mgraph.getViewport().setYAxisBoundsManual(true);
+                mgraph.getViewport().setMinY(0);
+                mgraph.getViewport().setMaxY(30);
+
+                mgraph.getViewport().setXAxisBoundsManual(true);
+                mgraph.getViewport().setMinX(0);
+                mgraph.getViewport().setMaxX(100);
+
+
+                mgraph.getViewport().setScrollable(true); // enables horizontal scrolling
+
+                mgraph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
+
+
+                mgraph.addSeries(series);
+
+
             }
 
             @Override
@@ -151,44 +209,8 @@ public class graph extends AppCompatActivity {
             }
         });
 
-//        myRef.child()
-//        mdel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                myRef.child("users").child(userID).child("History").addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        // Iterable used for "For loop" for any data type
-//                       // Iterable<DataSnapshot> dataSnapshots =  dataSnapshot.getChildren();
-//                        //For loop to get all data
-//                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//
-//
-//                            ds.getRef().removeValue();
-//                          //  adapter.notifyDataSetChanged();
-//
-//
-//                        }
-//
-//                    }
-//
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                        // Getting Post failed, log a message
-//                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-//                        // ...
-//                    }
-//                });
-//
-//            }
-//        });
-
 
     }
-
-
-// Read from the database
 
 
     private void toastMessage(String message) {

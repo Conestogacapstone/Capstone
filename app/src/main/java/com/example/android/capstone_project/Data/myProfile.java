@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.android.capstone_project.Activities.ActivityThree;
 import com.example.android.capstone_project.Authenticator.Login;
 import com.example.android.capstone_project.Authenticator.signUp;
 import com.example.android.capstone_project.R;
@@ -20,8 +18,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import static com.example.android.capstone_project.R.id.back;
 
 public class myProfile extends AppCompatActivity {
 
@@ -37,10 +33,16 @@ public class myProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+//
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        toolbar.setTitle(getString(R.string.app_name));
+//        //setSupportActionBar(toolbar);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(getString(R.string.app_name));
-        //setSupportActionBar(toolbar);
+        // Add back button
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -71,7 +73,7 @@ public class myProfile extends AppCompatActivity {
         remove = (Button) findViewById(R.id.remove);
         signOut = (Button) findViewById(R.id.sign_out);
         btnView =(Button) findViewById(R.id.viewUser);
-        btnBack =(Button) findViewById(back);
+        //btnBack =(Button) findViewById(back);
         oldEmail = (EditText) findViewById(R.id.old_email);
         newEmail = (EditText) findViewById(R.id.new_email);
         password = (EditText) findViewById(R.id.password);
@@ -221,15 +223,15 @@ public class myProfile extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(myProfile.this, ActivityThree.class);
-                startActivity(intent);
-            }
-        });
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//
+//
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(myProfile.this, ActivityThree.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 

@@ -28,8 +28,8 @@ public class signUp extends AppCompatActivity {
 
     private static final String TAG = "AddToDatabase";
 
-    private EditText inputEmail, inputPassword,inputRepassword;
-    private EditText inputForename,inputSurname;
+    private EditText inputEmail, inputPassword, inputRepassword;
+    private EditText inputForename, inputSurname;
     private Button btnSignIn, btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private String userID;
@@ -49,16 +49,16 @@ public class signUp extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
 
-
-
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
-        inputRepassword=(EditText) findViewById(R.id.repassword);
+        inputRepassword = (EditText) findViewById(R.id.repassword);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
 
+
+        //Password reset button
         btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +66,7 @@ public class signUp extends AppCompatActivity {
             }
         });
 
+        //Sign in button to move to Signin page
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +76,8 @@ public class signUp extends AppCompatActivity {
             }
         });
 
+
+        // Signup button
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +85,7 @@ public class signUp extends AppCompatActivity {
 
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
-                String repassword= inputRepassword.getText().toString().trim();
+                String repassword = inputRepassword.getText().toString().trim();
 
 
                 if (TextUtils.isEmpty(email)) {
@@ -112,6 +115,7 @@ public class signUp extends AppCompatActivity {
                     return;
                 }
 
+                //Progress bar visibility
                 progressBar.setVisibility(View.VISIBLE);
                 //create user
                 auth.createUserWithEmailAndPassword(email, password)
@@ -129,7 +133,6 @@ public class signUp extends AppCompatActivity {
                                 } else {
 
 
-
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     user.sendEmailVerification()
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -140,7 +143,7 @@ public class signUp extends AppCompatActivity {
                                                     }
                                                 }
                                             });
-                                      Intent intent = new Intent(signUp.this,Login.class);
+                                    Intent intent = new Intent(signUp.this, Login.class);
                                     startActivity(intent);
                                 }
                             }
@@ -155,5 +158,5 @@ public class signUp extends AppCompatActivity {
         super.onResume();
         progressBar.setVisibility(View.GONE);
     }
-    }
+}
 

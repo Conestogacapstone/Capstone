@@ -4,113 +4,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ba"
+    android:orientation="horizontal"
     tools:context="com.example.android.capstone_project.Model.livePage">
 
     <!-- TODO: Update blank fragment layout -->
-
-   <!-- <ListView
-        android:id="@+id/show_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/button3"
-        android:layout_alignEnd="@+id/button4" /> -->
 
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="230dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
         android:alpha="1"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/common_full_open_on_phone"
-        />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
 
     <Button
         android:id="@+id/moisture"
         android:layout_width="120dp"
         android:layout_height="49dp"
-        android:layout_alignBottom="@+id/waterOn"
         android:layout_alignStart="@+id/textView4"
-        android:text="Soil Humidity"
+        android:layout_centerVertical="true"
         android:background="#D4E157"
-        android:textColor="@color/black"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="406dp" />
 
-    <Button
-        android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_marginBottom="29dp"
-        android:text="Back" />
+        android:text="Moisture Level"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="231dp" />
 
     <Button
         android:id="@+id/waterOn"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/waterOff"
-        android:layout_alignEnd="@+id/waterOff"
         android:layout_alignStart="@+id/waterOff"
-        android:layout_marginBottom="21dp"
-        android:text="Tap to Water" />
+        android:layout_alignTop="@+id/moisture"
+        android:background="#D4E157"
+        android:text="Tap to Water"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="228dp"
+        tools:layout_editor_absoluteY="231dp" />
 
-    <Button
-        android:id="@+id/waterOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/backBtn"
-        android:layout_alignEnd="@+id/sign_out"
-        android:layout_marginBottom="43dp"
-        android:text="Tap to Stop Water" />
-
-    <Button
-        android:id="@+id/sign_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/waterOff"
-        android:layout_marginEnd="11dp"
-        android:text="Sign Out" />
 
     <TextView
-        android:id="@+id/rand"
+        android:id="@+id/sensorValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_alignBaseline="@+id/textView4"
         android:layout_alignBottom="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
-        android:text="54"
+        android:text="  "
         android:textColor="@color/black"
         android:textSize="25dp"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="406dp" />
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="306dp" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/waterOff"
+        android:layout_alignBottom="@+id/waterOff"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/waterOff"
-        android:layout_marginStart="12dp"
-        android:textSize="25dp"
+        android:layout_marginStart="16dp"
+        android:text="Moisture:"
         android:textColor="@color/black"
-        android:text="Humidity:" />
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="306dp" />
 
 
-    <!--<Button-->
-        <!--android:id="@+id/history"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/sign_out"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginBottom="14dp"-->
-        <!--android:text="History" />-->
+    <Button
+        android:id="@+id/waterOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/moisture"
+        android:layout_marginEnd="13dp"
+        android:layout_marginTop="13dp"
+        android:background="#D4E157"
+        android:text="Tap to Stop Water"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="228dp"
+        tools:layout_editor_absoluteY="292dp" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifgh"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/shower"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="340dp" />
+
 
 </RelativeLayout>

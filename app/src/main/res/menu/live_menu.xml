@@ -1,7 +1,4 @@
-
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <item
@@ -9,16 +6,19 @@
         android:title="History"
 
         >
-    <menu>
-        <item android:id="@+id/listView" android:title="List View"></item>
-        <item android:id="@+id/graphView" android:title="Graph View"></item>
-    </menu>
+        <menu>
+            <item
+                android:id="@+id/listView"
+                android:title="Moisture Level (List)"></item>
+            <item
+                android:id="@+id/graphView"
+                android:title="Moisture Level (Graph)"></item>
+        </menu>
     </item>
 
 
     <item
         android:id="@+id/reminder"
-        android:title="Reminder"
-        />
+        android:title="Reminder" />
 
 </menu>

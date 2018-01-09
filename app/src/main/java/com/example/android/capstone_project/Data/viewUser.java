@@ -26,7 +26,6 @@ public class viewUser extends AppCompatActivity {
     private TextView email;
     private TextView name;
     private View btnLogOut;
-    private TextView userId;
     private Button btnBack;
 
     @Override
@@ -37,7 +36,6 @@ public class viewUser extends AppCompatActivity {
         name = (TextView) findViewById(R.id.displayed_name);
         email = (TextView) findViewById(R.id.email_field);
         btnLogOut = findViewById(R.id.logout);
-        userId = (TextView) findViewById(R.id.user_id);
         imageView = (ImageView) findViewById(R.id.user_photo);
         btnBack =(Button) findViewById(R.id.back);
 
@@ -93,7 +91,6 @@ public class viewUser extends AppCompatActivity {
     private void setDataToView(FirebaseUser user) {
         email.setText("User Email: " + user.getEmail());
         name.setText("User name: " + user.getDisplayName());
-        userId.setText("User id: " + user.getUid());
     }
 
     @Override

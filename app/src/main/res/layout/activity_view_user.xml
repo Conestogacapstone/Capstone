@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:contentDescription="@null"
-        android:src="@drawable/frame" />
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/user_id"
@@ -48,9 +48,9 @@
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#A9A9A9"
+            android:background="#D4E157"
             android:text="Back"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/black" />
 
 
         <Button
@@ -61,9 +61,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="130dp"
             android:layout_marginStart="147dp"
-            android:background="#A9A9A9"
-            android:text="LogOut"
-            android:textColor="@android:color/white" />
+            android:background="#D4E157"
+            android:textColor="@color/black"
+            android:text="LogOut" />
     </RelativeLayout>
 
 </LinearLayout>

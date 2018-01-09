@@ -30,7 +30,6 @@
         android:layout_alignStart="@+id/textView4"
         android:layout_centerVertical="true"
         android:background="#D4E157"
-
         android:text="Moisture Level"
         android:textColor="@color/black"
         tools:layout_editor_absoluteX="16dp"

@@ -58,13 +58,6 @@ public class myProfile extends AppCompatActivity {
             }
         };
 
-        mailold.setVisibility(View.GONE);// Old mail visibility gone
-        mailnew.setVisibility(View.GONE);// new mail visibility gone
-        password.setVisibility(View.GONE);//password visibility gone
-        Passnew.setVisibility(View.GONE);// new password visibility gone
-        Mailchange_button.setVisibility(View.GONE);//mail_change visibility gone
-        Passchange_button.setVisibility(View.GONE);//pass_change visibility gone
-
         Emailchange_button = (Button) findViewById(R.id.emailchange_button);// Getting Emailchange button
         Passwordchange_button = (Button) findViewById(R.id.passchange_button);// Getting Passwordchange button
         UserRemove_button = (Button) findViewById(R.id.userremove_button);// Getting Userremove button
@@ -76,6 +69,13 @@ public class myProfile extends AppCompatActivity {
         mailnew = (EditText) findViewById(R.id.emailnew);// Getting NewEmail from text view
         password = (EditText) findViewById(R.id.password);// Getting password from textview
         Passnew = (EditText) findViewById(R.id.Pass_new);// Getting newpass from textview
+
+        mailold.setVisibility(View.GONE);// Old mail visibility gone
+        mailnew.setVisibility(View.GONE);// new mail visibility gone
+        password.setVisibility(View.GONE);//password visibility gone
+        Passnew.setVisibility(View.GONE);// new password visibility gone
+        Mailchange_button.setVisibility(View.GONE);//mail_change visibility gone
+        Passchange_button.setVisibility(View.GONE);//pass_change visibility gone
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);// Getting progressBar
 
@@ -212,8 +212,6 @@ public class myProfile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     //This method will sign out the user

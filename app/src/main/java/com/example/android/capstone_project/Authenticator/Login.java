@@ -21,10 +21,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
-    private EditText inputEmail, inputPassword;
-    private FirebaseAuth auth;
+    private EditText Email, Password;
+    private FirebaseAuth mauth;
     private ProgressBar progressBar;
-    private Button btnSignup, btnLogin, btnReset;
+    private Button Signup_button, Login_button, Reset_button;
 
 
     @Override
@@ -32,87 +32,85 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        //Get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
+        //Instance of Firebase
+        mauth = FirebaseAuth.getInstance();
 
 
-        if (auth.getCurrentUser() != null) {
+        //Automatic Login if user is already signed in
+        if (mauth.getCurrentUser() != null) {
 
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
             finish();
-            toastMessage("Successfully signed in with: " + auth.getCurrentUser().getEmail());
+            toastMessage("Successfully signed in with: " + mauth.getCurrentUser().getEmail());
 
         }
 
 
-        // set the view now
+        // This is the view
         setContentView(R.layout.activity_login);
 
 
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnSignup = (Button) findViewById(R.id.btn_signup);
-        btnLogin = (Button) findViewById(R.id.btn_login);
-        btnReset = (Button) findViewById(R.id.btn_reset_password);
-
-        //Get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
+        Email = (EditText) findViewById(R.id.inputemail); // Getting user's email to Email
+        Password = (EditText) findViewById(R.id.inputpassword); // Getting user's password to Password
+        progressBar = (ProgressBar) findViewById(R.id.progressBar); // Getting progressBar
+        Signup_button = (Button) findViewById(R.id.signup); // Getting Signup button
+        Login_button = (Button) findViewById(R.id.login); // Getting Login button
+        Reset_button = (Button) findViewById(R.id.reset_password); // Getting reset button
 
 
         //Signup button to move to registration page
-        btnSignup.setOnClickListener(new View.OnClickListener() {
+        Signup_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, signUp.class));
             }
         });
 
-        btnReset.setOnClickListener(new View.OnClickListener() {
+        //Reset button to move to resetPassword page
+        Reset_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, resetPassword.class));
             }
         });
 
-        //Login button
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        // This is the Login button
+        Login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = inputEmail.getText().toString();
-                final String password = inputPassword.getText().toString();
+                String email = Email.getText().toString();
+                final String password = Password.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please Enter your email address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please Enter your password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                //Visibility of progress bar is set to visible
                 progressBar.setVisibility(View.VISIBLE);
 
 
-                //authenticate user
-                auth.signInWithEmailAndPassword(email, password)
+                //This method will give authentication to user
+                mauth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
+                                // This method will display a message to the user if Login fails.
                                 progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
-                                    // there was an error
                                     if (password.length() < 6) {
-                                        inputPassword.setError(getString(R.string.minimum_password));
+                                        Password.setError(getString(R.string.minimum_password));
                                     } else {
                                         Toast.makeText(Login.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 }
+                                //If Log in is successful then it will redirect user to Main page.
                                 else {
 
                                     Intent intent = new Intent(Login.this, MainActivity.class);
@@ -125,6 +123,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    // This is the toast message method
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

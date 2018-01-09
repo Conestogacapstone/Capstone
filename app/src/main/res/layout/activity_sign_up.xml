@@ -18,7 +18,7 @@
 
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/inputemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
@@ -34,7 +34,7 @@
             android:layout_height="91dp">>
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/inputpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -49,7 +49,7 @@
                 android:textColorHint="#FF4081" />
 
             <EditText
-                android:id="@+id/repassword"
+                android:id="@+id/inputrepassword"
                 android:layout_width="174dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -68,7 +68,7 @@
 
 
         <Button
-            android:id="@+id/sign_up_button"
+            android:id="@+id/signup"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btn_reset_password"
+            android:id="@+id/reset_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
@@ -91,14 +91,13 @@
         <!-- Link to Login Screen -->
 
         <Button
-            android:id="@+id/sign_in_button"
+            android:id="@+id/signin"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@null"
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
-
             android:textColor="@color/colorAccent"
             android:textSize="15dp" />
     </LinearLayout>
@@ -109,7 +108,6 @@
         android:layout_height="30dp"
         android:layout_gravity="center|bottom"
         android:layout_marginBottom="20dp"
-
         android:visibility="gone" />
 
 </android.support.design.widget.CoordinatorLayout>

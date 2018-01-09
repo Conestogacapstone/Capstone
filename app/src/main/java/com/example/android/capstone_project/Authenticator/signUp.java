@@ -26,40 +26,36 @@ import android.widget.Toast;
 
 public class signUp extends AppCompatActivity {
 
-    private static final String TAG = "AddToDatabase";
 
-    private EditText inputEmail, inputPassword, inputRepassword;
-    private EditText inputForename, inputSurname;
-    private Button btnSignIn, btnSignUp, btnResetPassword;
+    private EditText Email, Password, Repassword;
+    private Button SignIn_button, SignUp_button, ResetPassword_button;
     private ProgressBar progressBar;
-    private String userID;
-    private FirebaseAuth auth;
-    private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference myRef;
+    private FirebaseAuth mauth;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // This is the view
         setContentView(R.layout.activity_sign_up);
 
 
         //Get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
+        mauth = FirebaseAuth.getInstance();
 
 
-        btnSignIn = (Button) findViewById(R.id.sign_in_button);
-        btnSignUp = (Button) findViewById(R.id.sign_up_button);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        inputRepassword = (EditText) findViewById(R.id.repassword);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
+        Email = (EditText) findViewById(R.id.inputemail); // Getting user's email to Email
+        Password = (EditText) findViewById(R.id.inputpassword); // Getting user's password to Password
+        Repassword = (EditText) findViewById(R.id.inputrepassword); // Getting user's Confirmational password to Repassword
+        progressBar = (ProgressBar) findViewById(R.id.progressBar); // Getting progressBar
+        ResetPassword_button = (Button) findViewById(R.id.reset_password); // Getting reset button
+        SignIn_button = (Button) findViewById(R.id.signin); // Getting Sign_in button
+        SignUp_button = (Button) findViewById(R.id.signup); // Getting Sign_up button
 
 
         //Password reset button
-        btnResetPassword.setOnClickListener(new View.OnClickListener() {
+        ResetPassword_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(signUp.this, resetPassword.class));
@@ -67,7 +63,7 @@ public class signUp extends AppCompatActivity {
         });
 
         //Sign in button to move to Signin page
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
+        SignIn_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(signUp.this, Login.class);
@@ -77,69 +73,67 @@ public class signUp extends AppCompatActivity {
         });
 
 
-        // Signup button
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        // This is the Signup button
+        SignUp_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                String email = inputEmail.getText().toString().trim();
-                String password = inputPassword.getText().toString().trim();
-                String repassword = inputRepassword.getText().toString().trim();
+                String email = Email.getText().toString().trim();
+                String password = Password.getText().toString().trim();
+                String repassword = Repassword.getText().toString().trim();
 
 
+                // If Email field is empty.
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please Enter your email address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                // If Password field is empty.
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please Enter your password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // If Re-Password field is empty.
                 if (TextUtils.isEmpty(repassword)) {
-                    Toast.makeText(getApplicationContext(), "Re-Enter password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please Re-Enter your password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // If Passwords do not match.
                 if (!password.equals(repassword)) {
                     Toast.makeText(getApplicationContext(), "Password not matched!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
+                // If Password's length is short then required.
                 if (password.length() < 6) {
-                    Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please Enter minimum of 6 characters in your password field!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                //Progress bar visibility
+                //Visibility of progress bar is set to visible
                 progressBar.setVisibility(View.VISIBLE);
-                //create user
-                auth.createUserWithEmailAndPassword(email, password)
+
+                // A new user will be created with this method
+                mauth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(signUp.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(signUp.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(signUp.this, "User created with email:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
+                                // This method will display a message to the user if Signup fails.
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(signUp.this, "Authentication failed." + task.getException(),
+                                    Toast.makeText(signUp.this, "Oops something went wrong, Failed to Register" + task.getException(),
                                             Toast.LENGTH_SHORT).show();
-                                } else {
-
-
+                                }
+                                //If Log in is successful then it will redirect user to Login page.
+                                else {
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     user.sendEmailVerification()
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        Toast.makeText(signUp.this, "Signup successful,Verification mail sent", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(signUp.this, "Registration was successful and the verification mail was sent to your E-mail", Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
                                             });
@@ -148,7 +142,6 @@ public class signUp extends AppCompatActivity {
                                 }
                             }
                         });
-
             }
         });
     }

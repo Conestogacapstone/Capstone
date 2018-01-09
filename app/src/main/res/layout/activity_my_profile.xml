@@ -18,7 +18,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <EditText
-            android:id="@+id/old_email"
+            android:id="@+id/emailold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_email"
@@ -27,7 +27,7 @@
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/new_email"
+            android:id="@+id/emailnew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_new_email"
@@ -48,11 +48,10 @@
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/newPassword"
+            android:id="@+id/Pass_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-
             android:hint="@string/new_pass"
             android:imeActionId="@+id/login"
             android:imeOptions="actionUnspecified"
@@ -61,7 +60,7 @@
             android:singleLine="true" />
 
         <Button
-            android:id="@+id/changeEmail"
+            android:id="@+id/email_change"
             style="?android:textAppearanceSmall"
 
             android:layout_width="wrap_content"
@@ -74,7 +73,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/changePass"
+            android:id="@+id/Pass_change"
             style="?android:textAppearanceSmall"
 
             android:layout_width="wrap_content"
@@ -93,7 +92,7 @@
             android:visibility="gone" />
 
         <Button
-            android:id="@+id/change_email_button"
+            android:id="@+id/emailchange_button"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,7 +103,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/change_password_button"
+            android:id="@+id/passchange_button"
             style="?android:textAppearanceSmall"
 
             android:layout_width="match_parent"
@@ -117,7 +116,7 @@
 
 
         <Button
-            android:id="@+id/remove_user_button"
+            android:id="@+id/userremove_button"
             style="?android:textAppearanceSmall"
 
             android:layout_width="match_parent"
@@ -142,7 +141,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/sign_out"
+            android:id="@+id/signout"
 
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"

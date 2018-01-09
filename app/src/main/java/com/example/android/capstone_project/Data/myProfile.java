@@ -21,15 +21,17 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class myProfile extends AppCompatActivity {
 
-    private Button Emailchange_button, Passwordchange_button,UserRemove_button,Mailchange_button,Passchange_button,signOut_button,ViewProfile_button;
-    private EditText oldEmail, newEmail, password, newPassword;
+    private Button Emailchange_button, Passwordchange_button, UserRemove_button, Mailchange_button, Passchange_button, signOut_button, ViewProfile_button;
+    private EditText mailold, mailnew, password, Passnew;
     private ProgressBar progressBar;
-    private FirebaseAuth.AuthStateListener authListener;
-    private FirebaseAuth auth;
+    private FirebaseAuth.AuthStateListener mListenerauth;
+    private FirebaseAuth mauth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //This is the view
         setContentView(R.layout.activity_my_profile);
 
 
@@ -39,135 +41,135 @@ public class myProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //get firebase auth instance
-        auth = FirebaseAuth.getInstance();
+        //Instance of Firebase
+        mauth = FirebaseAuth.getInstance();
 
-        //get current user
+        //getting current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        authListener = new FirebaseAuth.AuthStateListener() {
+        mListenerauth = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
-                    // user auth state is changed - user is null
-                    // launch login activity
                     startActivity(new Intent(myProfile.this, Login.class));
                     finish();
                 }
             }
         };
 
-        Emailchange_button = (Button) findViewById(R.id.change_email_button);
-        Passwordchange_button = (Button) findViewById(R.id.change_password_button);
-        UserRemove_button = (Button) findViewById(R.id.remove_user_button);
-        Mailchange_button = (Button) findViewById(R.id.changeEmail);
-        Passchange_button = (Button) findViewById(R.id.changePass);
-        signOut_button = (Button) findViewById(R.id.sign_out);
-        ViewProfile_button =(Button) findViewById(R.id.viewUser);
-        oldEmail = (EditText) findViewById(R.id.old_email);
-        newEmail = (EditText) findViewById(R.id.new_email);
-        password = (EditText) findViewById(R.id.password);
-        newPassword = (EditText) findViewById(R.id.newPassword);
+        mailold.setVisibility(View.GONE);// Old mail visibility gone
+        mailnew.setVisibility(View.GONE);// new mail visibility gone
+        password.setVisibility(View.GONE);//password visibility gone
+        Passnew.setVisibility(View.GONE);// new password visibility gone
+        Mailchange_button.setVisibility(View.GONE);//mail_change visibility gone
+        Passchange_button.setVisibility(View.GONE);//pass_change visibility gone
 
-        oldEmail.setVisibility(View.GONE);
-        newEmail.setVisibility(View.GONE);
-        password.setVisibility(View.GONE);
-        newPassword.setVisibility(View.GONE);
-        Mailchange_button.setVisibility(View.GONE);
-        Passchange_button.setVisibility(View.GONE);
+        Emailchange_button = (Button) findViewById(R.id.emailchange_button);// Getting Emailchange button
+        Passwordchange_button = (Button) findViewById(R.id.passchange_button);// Getting Passwordchange button
+        UserRemove_button = (Button) findViewById(R.id.userremove_button);// Getting Userremove button
+        Mailchange_button = (Button) findViewById(R.id.email_change);// Getting Emailchange button
+        Passchange_button = (Button) findViewById(R.id.Pass_change);// Getting Passchange button
+        signOut_button = (Button) findViewById(R.id.signout);// Getting Signout button
+        ViewProfile_button = (Button) findViewById(R.id.viewUser);// Getting Viewprofile button
+        mailold = (EditText) findViewById(R.id.emailold);// Getting Emailchange from text view
+        mailnew = (EditText) findViewById(R.id.emailnew);// Getting NewEmail from text view
+        password = (EditText) findViewById(R.id.password);// Getting password from textview
+        Passnew = (EditText) findViewById(R.id.Pass_new);// Getting newpass from textview
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);// Getting progressBar
 
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
 
+        //This method will change the visibility of text fields
         Emailchange_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                oldEmail.setVisibility(View.GONE);
-                newEmail.setVisibility(View.VISIBLE);
+                mailold.setVisibility(View.GONE);
+                mailnew.setVisibility(View.VISIBLE);
                 password.setVisibility(View.GONE);
-                newPassword.setVisibility(View.GONE);
+                Passnew.setVisibility(View.GONE);
                 Mailchange_button.setVisibility(View.VISIBLE);
                 Passchange_button.setVisibility(View.GONE);
             }
         });
 
+        //This method will change the email
         Mailchange_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                if (user != null && !newEmail.getText().toString().trim().equals("")) {
-                    user.updateEmail(newEmail.getText().toString().trim())
+                if (user != null && !mailnew.getText().toString().trim().equals("")) {
+                    user.updateEmail(mailnew.getText().toString().trim())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(myProfile.this, "Email address is updated. Please sign in with new email id!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(myProfile.this, "Your Email address is changed", Toast.LENGTH_LONG).show();
                                         signOut();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
-                                        Toast.makeText(myProfile.this, "Failed to update email!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(myProfile.this, "Sorry, Your Email address was not changed", Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
                             });
-                } else if (newEmail.getText().toString().trim().equals("")) {
-                    newEmail.setError("Enter email");
+                } else if (mailnew.getText().toString().trim().equals("")) {
+                    mailnew.setError("Please Enter your email");
                     progressBar.setVisibility(View.GONE);
                 }
             }
         });
 
+        //This method will change the visibility of textfields
         Passwordchange_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                oldEmail.setVisibility(View.GONE);
-                newEmail.setVisibility(View.GONE);
+                mailold.setVisibility(View.GONE);
+                mailnew.setVisibility(View.GONE);
                 password.setVisibility(View.GONE);
-                newPassword.setVisibility(View.VISIBLE);
+                Passnew.setVisibility(View.VISIBLE);
                 Mailchange_button.setVisibility(View.GONE);
                 Passchange_button.setVisibility(View.VISIBLE);
             }
         });
 
+        //This method will change the password
         Passchange_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                if (user != null && !newPassword.getText().toString().trim().equals("")) {
-                    if (newPassword.getText().toString().trim().length() < 6) {
-                        newPassword.setError("Password too short, enter minimum 6 characters");
+                if (user != null && !Passnew.getText().toString().trim().equals("")) {
+                    if (Passnew.getText().toString().trim().length() < 6) {
+                        Passnew.setError("Please Enter minimum of 6 characters in your password field");
                         progressBar.setVisibility(View.GONE);
                     } else {
-                        user.updatePassword(newPassword.getText().toString().trim())
+                        user.updatePassword(Passnew.getText().toString().trim())
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(myProfile.this, "Password is updated, sign in with new password!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(myProfile.this, "Password is updated, sign in with new password", Toast.LENGTH_SHORT).show();
                                             signOut();
                                             progressBar.setVisibility(View.GONE);
                                         } else {
-                                            Toast.makeText(myProfile.this, "Failed to update password!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(myProfile.this, "Failed to update password", Toast.LENGTH_SHORT).show();
                                             progressBar.setVisibility(View.GONE);
                                         }
                                     }
                                 });
                     }
-                } else if (newPassword.getText().toString().trim().equals("")) {
-                    newPassword.setError("Enter password");
+                } else if (Passnew.getText().toString().trim().equals("")) {
+                    Passnew.setError("Enter password");
                     progressBar.setVisibility(View.GONE);
                 }
             }
         });
 
 
-
-
-
+        //This method will remove the User
         UserRemove_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,6 +194,7 @@ public class myProfile extends AppCompatActivity {
             }
         });
 
+        //This method will sign out the user
         signOut_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,6 +202,7 @@ public class myProfile extends AppCompatActivity {
             }
         });
 
+        //This method will view the profile of user
         ViewProfile_button.setOnClickListener(new View.OnClickListener() {
 
 
@@ -210,12 +214,11 @@ public class myProfile extends AppCompatActivity {
         });
 
 
-
     }
 
-    //sign out method
+    //This method will sign out the user
     public void signOut() {
-        auth.signOut();
+        mauth.signOut();
     }
 
     @Override
@@ -227,15 +230,15 @@ public class myProfile extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        auth.addAuthStateListener(authListener);
+        mauth.addAuthStateListener(mListenerauth);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (authListener != null) {
-            auth.removeAuthStateListener(authListener);
+        if (mListenerauth != null) {
+            mauth.removeAuthStateListener(mListenerauth);
         }
     }
-    }
+}
 

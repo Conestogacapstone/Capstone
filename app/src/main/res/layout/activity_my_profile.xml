@@ -93,23 +93,9 @@
             android:visibility="gone" />
 
         <Button
-            android:id="@+id/remove"
-            style="?android:textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="16dp"
-
-            android:background="#D4E157"
-            android:text="@string/btn_remove"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-        <Button
             android:id="@+id/change_email_button"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="#D4E157"

@@ -18,57 +18,71 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class resetPassword extends AppCompatActivity {
 
-    private EditText inputEmail;
-    private Button btnReset, btnBack;
-    private FirebaseAuth auth;
+    private EditText Email;
+    private Button Reset_button, Back_button;
+    private FirebaseAuth mauth;
     private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        //This is the view
         setContentView(R.layout.activity_reset_password);
 
-        inputEmail = (EditText) findViewById(R.id.email);
-        btnReset = (Button) findViewById(R.id.btn_reset_password);
-        btnBack = (Button) findViewById(R.id.btn_back);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        Email = (EditText) findViewById(R.id.inputemail); // Getting user's email to Email
+        Reset_button = (Button) findViewById(R.id.resetpassword); // Getting reset button
+        Back_button = (Button) findViewById(R.id.back); // Getting back button
+        progressBar = (ProgressBar) findViewById(R.id.progressBar); // Getting progressBar
 
-        auth = FirebaseAuth.getInstance();
+        //Instance of Firebase
+        mauth = FirebaseAuth.getInstance();
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        // This method will reset the users password
+        Reset_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String email = Email.getText().toString().trim();
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplication(), "Please enter your Email address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //Visibility of progress bar is set to visible
+                progressBar.setVisibility(View.VISIBLE);
+
+                // This method will send reset password email to users email address
+                mauth.sendPasswordResetEmail(email)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(resetPassword.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(resetPassword.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                                }
+
+                                //Visibility of progress bar is set to invisible
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        });
+            }
+        });
+
+
+        //This is the back button which will take user to login page.
+        Back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                String email = inputEmail.getText().toString().trim();
-
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplication(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                progressBar.setVisibility(View.VISIBLE);
-                auth.sendPasswordResetEmail(email)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(resetPassword.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(resetPassword.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
-                                }
-
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        });
-            }
-        });
     }
 
 }

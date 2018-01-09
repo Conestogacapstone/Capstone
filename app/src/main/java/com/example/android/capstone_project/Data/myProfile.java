@@ -21,9 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class myProfile extends AppCompatActivity {
 
-    private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
-            changeEmail, changePassword, sendEmail, remove, signOut,btnView,btnBack;
-
+    private Button Emailchange_button, Passwordchange_button,UserRemove_button,Mailchange_button,Passchange_button,signOut_button,ViewProfile_button;
     private EditText oldEmail, newEmail, password, newPassword;
     private ProgressBar progressBar;
     private FirebaseAuth.AuthStateListener authListener;
@@ -33,10 +31,7 @@ public class myProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-//
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        toolbar.setTitle(getString(R.string.app_name));
-//        //setSupportActionBar(toolbar);
+
 
         // Add back button
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -63,17 +58,13 @@ public class myProfile extends AppCompatActivity {
             }
         };
 
-        btnChangeEmail = (Button) findViewById(R.id.change_email_button);
-        btnChangePassword = (Button) findViewById(R.id.change_password_button);
-       // btnSendResetEmail = (Button) findViewById(R.id.sending_pass_reset_button);
-        btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
-        changeEmail = (Button) findViewById(R.id.changeEmail);
-        changePassword = (Button) findViewById(R.id.changePass);
-       // sendEmail = (Button) findViewById(R.id.send);
-        remove = (Button) findViewById(R.id.remove);
-        signOut = (Button) findViewById(R.id.sign_out);
-        btnView =(Button) findViewById(R.id.viewUser);
-        //btnBack =(Button) findViewById(back);
+        Emailchange_button = (Button) findViewById(R.id.change_email_button);
+        Passwordchange_button = (Button) findViewById(R.id.change_password_button);
+        UserRemove_button = (Button) findViewById(R.id.remove_user_button);
+        Mailchange_button = (Button) findViewById(R.id.changeEmail);
+        Passchange_button = (Button) findViewById(R.id.changePass);
+        signOut_button = (Button) findViewById(R.id.sign_out);
+        ViewProfile_button =(Button) findViewById(R.id.viewUser);
         oldEmail = (EditText) findViewById(R.id.old_email);
         newEmail = (EditText) findViewById(R.id.new_email);
         password = (EditText) findViewById(R.id.password);
@@ -83,10 +74,8 @@ public class myProfile extends AppCompatActivity {
         newEmail.setVisibility(View.GONE);
         password.setVisibility(View.GONE);
         newPassword.setVisibility(View.GONE);
-        changeEmail.setVisibility(View.GONE);
-        changePassword.setVisibility(View.GONE);
-        //sendEmail.setVisibility(View.GONE);
-        remove.setVisibility(View.GONE);
+        Mailchange_button.setVisibility(View.GONE);
+        Passchange_button.setVisibility(View.GONE);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -94,21 +83,19 @@ public class myProfile extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
 
-        btnChangeEmail.setOnClickListener(new View.OnClickListener() {
+        Emailchange_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 oldEmail.setVisibility(View.GONE);
                 newEmail.setVisibility(View.VISIBLE);
                 password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.GONE);
-                changeEmail.setVisibility(View.VISIBLE);
-                changePassword.setVisibility(View.GONE);
-               // sendEmail.setVisibility(View.GONE);
-                remove.setVisibility(View.GONE);
+                Mailchange_button.setVisibility(View.VISIBLE);
+                Passchange_button.setVisibility(View.GONE);
             }
         });
 
-        changeEmail.setOnClickListener(new View.OnClickListener() {
+        Mailchange_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -134,21 +121,19 @@ public class myProfile extends AppCompatActivity {
             }
         });
 
-        btnChangePassword.setOnClickListener(new View.OnClickListener() {
+        Passwordchange_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 oldEmail.setVisibility(View.GONE);
                 newEmail.setVisibility(View.GONE);
                 password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.VISIBLE);
-                changeEmail.setVisibility(View.GONE);
-                changePassword.setVisibility(View.VISIBLE);
-                //sendEmail.setVisibility(View.GONE);
-                remove.setVisibility(View.GONE);
+                Mailchange_button.setVisibility(View.GONE);
+                Passchange_button.setVisibility(View.VISIBLE);
             }
         });
 
-        changePassword.setOnClickListener(new View.OnClickListener() {
+        Passchange_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -183,7 +168,7 @@ public class myProfile extends AppCompatActivity {
 
 
 
-        btnRemoveUser.setOnClickListener(new View.OnClickListener() {
+        UserRemove_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -206,7 +191,15 @@ public class myProfile extends AppCompatActivity {
                 }
             }
         });
-        btnView.setOnClickListener(new View.OnClickListener() {
+
+        signOut_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+
+        ViewProfile_button.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
@@ -216,22 +209,7 @@ public class myProfile extends AppCompatActivity {
             }
         });
 
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
 
-//        btnBack.setOnClickListener(new View.OnClickListener() {
-//
-//
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(myProfile.this, ActivityThree.class);
-//                startActivity(intent);
-//            }
-//        });
 
     }
 

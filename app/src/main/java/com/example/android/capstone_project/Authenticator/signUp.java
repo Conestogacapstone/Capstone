@@ -49,7 +49,7 @@ public class signUp extends AppCompatActivity {
         Password = (EditText) findViewById(R.id.inputpassword); // Getting user's password to Password
         Repassword = (EditText) findViewById(R.id.inputrepassword); // Getting user's Confirmational password to Repassword
         progressBar = (ProgressBar) findViewById(R.id.progressBar); // Getting progressBar
-        ResetPassword_button = (Button) findViewById(R.id.reset_password); // Getting reset button
+        ResetPassword_button = (Button) findViewById(R.id.resetpassword); // Getting reset button
         SignIn_button = (Button) findViewById(R.id.signin); // Getting Sign_in button
         SignUp_button = (Button) findViewById(R.id.signup); // Getting Sign_up button
 

@@ -56,8 +56,15 @@ public class Login extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar); // Getting progressBar
         Signup_button = (Button) findViewById(R.id.signup); // Getting Signup button
         Login_button = (Button) findViewById(R.id.login); // Getting Login button
-        Reset_button = (Button) findViewById(R.id.reset_password); // Getting reset button
+        Reset_button = (Button) findViewById(R.id.resetpassword); // Getting reset button
 
+        //Reset button to move to resetPassword page
+        Reset_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, resetPassword.class));
+            }
+        });
 
         //Signup button to move to registration page
         Signup_button.setOnClickListener(new View.OnClickListener() {
@@ -67,13 +74,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        //Reset button to move to resetPassword page
-        Reset_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Login.this, resetPassword.class));
-            }
-        });
 
         // This is the Login button
         Login_button.setOnClickListener(new View.OnClickListener() {

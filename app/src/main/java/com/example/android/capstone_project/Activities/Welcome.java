@@ -21,7 +21,6 @@ public class Welcome extends AppCompatActivity {
         // Hiding Action bar
         getSupportActionBar().hide();
 
-
         // Handler to move from one page to another
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

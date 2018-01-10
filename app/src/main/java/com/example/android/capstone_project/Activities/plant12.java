@@ -10,6 +10,7 @@ public class plant12 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //This is the view
         setContentView(R.layout.activity_plant12);
 
         // Add back button

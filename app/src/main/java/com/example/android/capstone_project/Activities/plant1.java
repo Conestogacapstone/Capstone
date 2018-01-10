@@ -10,12 +10,12 @@ public class plant1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //This is the view
         setContentView(R.layout.activity_plant1);
 
         // Add back button
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 }

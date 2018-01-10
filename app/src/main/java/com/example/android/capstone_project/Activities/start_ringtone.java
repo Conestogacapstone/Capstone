@@ -13,9 +13,9 @@ import com.example.android.capstone_project.R;
 
 public class start_ringtone extends Service {
 
-    private boolean isRunning;
-    MediaPlayer mMediaPlayer;
-    private int startId;
+    private boolean reminder_running;
+    MediaPlayer ringtone;
+    private int Id;
 
 
     @Nullable
@@ -25,8 +25,7 @@ public class start_ringtone extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
+    public int onStartCommand(Intent intent, int flags, int startId) {
 
         //This method is to trigger Notification in application
         final NotificationManager mNM = (NotificationManager)
@@ -36,7 +35,8 @@ public class start_ringtone extends Service {
         Intent intent1 = new Intent(this.getApplicationContext(), ActivityTwo.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
 
-        Notification mNotify  = new Notification.Builder(this)
+        //Setting title for notification Bar
+        Notification mNotify = new Notification.Builder(this)
                 .setContentTitle("Cure Plants - Reminder")
                 .setContentText("Click me!")
                 .setSmallIcon(R.drawable.logo)
@@ -46,7 +46,7 @@ public class start_ringtone extends Service {
 
         String state = intent.getExtras().getString("extra");
 
-
+        //This is switch statement according to the state of reminder
         assert state != null;
         switch (state) {
             case "no":
@@ -60,45 +60,33 @@ public class start_ringtone extends Service {
                 break;
         }
 
-
-
         // This method will start the alarm sound
-        if(!this.isRunning && startId == 1) {
+        if (!this.reminder_running && startId == 1) {
 
-
-            mMediaPlayer = MediaPlayer.create(this, R.raw.morning_alarm);
-
-            mMediaPlayer.start();
-
-
+            ringtone = MediaPlayer.create(this, R.raw.morning_alarm);
+            ringtone.start();
             mNM.notify(0, mNotify);
+            this.reminder_running = true;
+            this.Id = 0;
 
-            this.isRunning = true;
-            this.startId = 0;
+        } else if (!this.reminder_running && startId == 0) {
 
+            this.reminder_running = false;
+            this.Id = 0;
+
+        } else if (this.reminder_running && startId == 1) {
+
+            this.reminder_running = true;
+            this.Id = 0;
+
+        } else {
+
+            ringtone.stop();
+            ringtone.reset();
+
+            this.reminder_running = false;
+            this.Id = 0;
         }
-        else if (!this.isRunning && startId == 0){
-
-            this.isRunning = false;
-            this.startId = 0;
-
-        }
-
-        else if (this.isRunning && startId == 1){
-
-            this.isRunning = true;
-            this.startId = 0;
-
-        }
-        else {
-
-            mMediaPlayer.stop();
-            mMediaPlayer.reset();
-
-            this.isRunning = false;
-            this.startId = 0;
-        }
-
 
         return START_NOT_STICKY;
     }
@@ -108,7 +96,7 @@ public class start_ringtone extends Service {
     public void onDestroy() {
         super.onDestroy();
 
-        this.isRunning = false;
+        this.reminder_running = false;
     }
 
 }

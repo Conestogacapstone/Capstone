@@ -8,12 +8,10 @@
     android:label="@string/app_name"
     tools:context="com.example.android.capstone_project.Activities.MainActivity">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"

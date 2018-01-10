@@ -48,110 +48,92 @@ import pl.droidsonroids.gif.GifImageView;
 
 
 public class livePage extends AppCompatActivity {
-    private static final String TAG = "ViewDatabase";
-    private Button btnBack;
     JSONObject jsonObject = new JSONObject();
-    private Button btnSignout, mhistory, btnmoisture, btnwaterOn, btnwaterOff;
-    private ToggleButton btntoggle;
+    private Button btnmoisture, btnwaterOn;
     private TextView mtextview;
     private GifImageView mgif;
-    private ImageView mImageView;
-    private ProgressDialog mProgress;
+    private ImageView mImageView,mindicator1,mindicator2,mOn,mOff;
     CountDownTimer timer;
-    Boolean isClickedon, isClickedoff; // global after the declaration of your class
-
-
+    Boolean isClickedon; // global after the declaration of your class
 
 
     //add Firebase Database stuff
     private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mauth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
     private StorageReference mStorageRef;
-    DataSnapshot storageRef;
-
     String userID;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //This is the view
         setContentView(R.layout.activity_live_page);
 
+        mStorageRef = FirebaseStorage.getInstance().getReference();//Getting storage refernce
+        btnmoisture = (Button) findViewById(R.id.moisture);//Getting moisture button
+        btnwaterOn = (Button) findViewById(R.id.waterOn);//Getting waterOn button
+        mtextview = (TextView) findViewById(R.id.sensorValue);//Getting sensor text view
+        mImageView = (ImageView) findViewById(R.id.imageView);//Getting imageview to set the image according to sensor values
+        mgif = (GifImageView) findViewById(R.id.gifgh);//Getting Gif view
+        mindicator1 =(ImageView) findViewById(R.id.green);//Getting indicator
+        mindicator2 =(ImageView) findViewById(R.id.red);//getting indicator
+        mOff =(ImageView) findViewById(R.id.off);//getting indicator
+        mOn =(ImageView) findViewById(R.id.on);//getting indicator
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
-       // btnBack = (Button) findViewById(R.id.backBtn);
-        mhistory = (Button) findViewById(R.id.history);
-        btnmoisture = (Button) findViewById(R.id.moisture);
-        btnwaterOn = (Button) findViewById(R.id.waterOn);
-        btnwaterOff = (Button) findViewById(R.id.waterOff);
-        mtextview = (TextView) findViewById(R.id.sensorValue);
-       // btnSignout = (Button) findViewById(R.id.sign_out);
-        mImageView = (ImageView) findViewById(R.id.imageView);
-        mgif =(GifImageView) findViewById(R.id.gifgh);
 
         // Add back button
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        isClickedon = false;//Boolean variable for waterOn pump
+       // isClickedoff = false;//Boolean value for waterOff pump
 
-
-
-
-        mProgress = new ProgressDialog(this);
-        isClickedon = false;
-        isClickedoff = false;
-
-
-        mAuth = FirebaseAuth.getInstance();
+        //Instance of firebase
+        mauth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-        FirebaseUser user = mAuth.getCurrentUser();
-        userID = user.getUid();
-
-
+        FirebaseUser user = mauth.getCurrentUser();//Getting current user
+        userID = user.getUid();//Getting unique Id of the user
 
         //Authentication method
-        //NOTE: Unless you are signed in, this will not be useable.
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     toastMessage("Successfully signed in with: " + user.getEmail());
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
                     toastMessage("Successfully signed out.");
                 }
-                // ...
             }
         };
 
-        //This function is setting and getting random value from database
+        //This function is getting moisture level from database
         btnmoisture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
+                //Asynch Http request to get data from cloud
                 AsyncHttpClient client = new AsyncHttpClient();
-                RequestParams params = new RequestParams();
-                params.put("x-aio-key", "47f1d473707041829ad00da61f99da23");
+                RequestParams params = new RequestParams();//requesting parameters from cloud
+                params.put("x-aio-key", "f1b3f9d0456d404a8d68e86ee3661b21");//Passing Adafruit key here
+                //Get request to get Data from cloud
                 client.get("https://io.adafruit.com/api/v2/capsProject/feeds/sensor/data", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        // Root JSON in response is an dictionary i.e { "data : [ ... ] }
                         // Handle resulting parsed JSON response here
                         try {
                             JSONObject firstArray = response.getJSONObject(0);
-                            String responseData = firstArray.getString("value").toString();
+                            String responseData = firstArray.getString("value").toString();//Storing data in a String variable
                             float data = Float.parseFloat(responseData);
-                            mtextview.setText(responseData);
+                            mtextview.setText(responseData);//Setting the data in a textfield
 
+                            //Conditions to set the image according to the sensor value
                             if (data <= 25) {
                                 mImageView.setImageResource(R.drawable.dead);
 
@@ -169,6 +151,63 @@ public class livePage extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+                        // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                    }
+                });
+            }
+        });
+
+        //This method is to set water pump On
+        btnwaterOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Restrict the number of clicks on water pump
+                int clicks = 0;
+                clicks++;
+
+                if (clicks == 1) {
+                    btnwaterOn.setEnabled(false);
+                }
+                mgif.setVisibility(View.VISIBLE);//Setting Gif when user clicks WaterOn button
+                mindicator1.setVisibility(View.VISIBLE);//Setting green indicator visible
+                mindicator2.setVisibility(View.INVISIBLE);//Setting indicator invisible
+                mOn.setVisibility(View.VISIBLE);//Setting indicator On
+                mOff.setVisibility(View.INVISIBLE);//Setting indicator off
+
+                //Changing color of button as the user clicks the button
+                btnwaterOn.setBackgroundColor(Color.parseColor("#00b200"));
+
+                //These are the date formatters to get the date at the time user hits wateron button and storing data in firebase
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                SimpleDateFormat formatter1 = new SimpleDateFormat(":HH:mm:ss");
+                Date date1 = new Date();
+                final String obj1 = formatter.format(date);
+                final String obj2 = formatter1.format(date1);
+
+
+                //This is the Asynch Http request
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams params = new RequestParams();
+                params.put("x-aio-key", "f1b3f9d0456d404a8d68e86ee3661b21");
+                client.get("https://io.adafruit.com/api/v2/capsProject/feeds/sensor/data", params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        // Handle resulting parsed JSON response here
+                        try {
+                            JSONObject firstArray = response.getJSONObject(0);
+                            String responseData = firstArray.getString("value").toString();//Storing data in a String variable
+                            //Here date and time are pushed to database
+                            myRef.child("users").child(userID).child("History").push().setValue(obj1 + "Time" + obj2 + " " + "Moisture level-" + " " + responseData + "       ");
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
@@ -176,207 +215,17 @@ public class livePage extends AppCompatActivity {
                     }
                 });
 
-
-
-            }
-
-
-        });
-
-
-
-            btnwaterOn.setOnClickListener(new View.OnClickListener() {
-
-
-                @Override
-                public void onClick(View v) {
-
-                    int clicks = 0;
-                    clicks++;
-
-                    if (clicks == 1){
-                        btnwaterOn.setEnabled(false);
-                    }
-
-                    mgif.setVisibility(View.VISIBLE);
-
-
-
-                    btnwaterOff.setBackgroundColor(Color.parseColor("#D4E157"));
-                    btnwaterOn.setBackgroundColor(Color.parseColor("#00b200"));
-
-
-                    // Date currentTime = Calendar.getInstance().getTime();
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                    Date date = new Date();
-                    //  System.out.println(formatter.format(date));
-                    SimpleDateFormat formatter1 = new SimpleDateFormat(":HH:mm:ss");
-                    Date date1 = new Date();
-                    //System.out.println(formatter1.format(date1));
-                    //   final String historyObject = currentTime.toString();
-                    final String obj1 = formatter.format(date);
-                    final String obj2 = formatter1.format(date1);
-
-
-                    AsyncHttpClient client = new AsyncHttpClient();
-                    RequestParams params = new RequestParams();
-                    params.put("x-aio-key", "47f1d473707041829ad00da61f99da23");
-                    client.get("https://io.adafruit.com/api/v2/capsProject/feeds/sensor/data", params, new JsonHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                            // Root JSON in response is an dictionary i.e { "data : [ ... ] }
-                            // Handle resulting parsed JSON response here
-                            try {
-                                JSONObject firstArray = response.getJSONObject(0);
-                                String responseData = firstArray.getString("value").toString();
-                                //Here date and time are pushed to database
-                                myRef.child("users").child(userID).child("History").push().setValue(obj1 + "Time" + obj2 + " " + "Moisture level-" + " " + responseData+"       ");
-
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
-                            // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                        }
-                    });
-
-
-
-
-                    try {
-
-
-                        //  AsyncHttpClient client = new AsyncHttpClient();
-                        StringEntity entity;
-                        // JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("value", "ON");
-                        entity = new StringEntity(jsonObject.toString());
-
-
-                        client.post(livePage.this, "https://io.adafruit.com/api/v2/capsProject/feeds/valve/data?x-aio-key=47f1d473707041829ad00da61f99da23", entity, "application/json", new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                System.out.println("Sucess");
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                            }
-                        });
-
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        System.out.println("Error " + e);
-                    }
-
-
-
-
-                    timer = new CountDownTimer(10000, 1000) {
-
-
-                        AsyncHttpClient client = new AsyncHttpClient();
-
-                        public void onTick(long millisUntilFinished) {
-
-                            System.out.println("seconds remaining: " + millisUntilFinished / 1000);
-
-
-
-
-
-                        }
-
-                        public void onFinish() {
-                            System.out.println("done");
-                            btnwaterOn.setEnabled(true);
-
-
-                            try {
-                                StringEntity entity;
-                                // JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("value", "OFF");
-                                entity = new StringEntity(jsonObject.toString());
-
-
-                                client.post(livePage.this, "https://io.adafruit.com/api/v2/capsProject/feeds/valve/data?x-aio-key=47f1d473707041829ad00da61f99da23", entity, "application/json", new AsyncHttpResponseHandler() {
-                                    @Override
-                                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                        System.out.println("Sucess");
-                                        btnwaterOff.setBackgroundColor(Color.parseColor("#FF0000"));
-                                        btnwaterOn.setBackgroundColor(Color.parseColor("#D4E157"));
-                                        mgif.setVisibility(View.INVISIBLE);
-                                    }
-
-                                    @Override
-                                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                                    }
-                                });
-
-                            } catch (UnsupportedEncodingException e) {
-                                e.printStackTrace();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-
-
-                    };
-                    timer.start();
-
-                }
-            });
-
-
-
-
-        //This is onClickListner to tap Off the water pump
-        btnwaterOff.setOnClickListener(new View.OnClickListener() {
-
-
-
-
-
-
-            AsyncHttpClient client = new AsyncHttpClient();
-
-            @Override
-            public void onClick(View v) {
-                if (timer != null) {
-                    timer.cancel();
-
-
-
-                }
-                btnwaterOn.setEnabled(true);
-                mgif.setVisibility(View.INVISIBLE);
-
-                btnwaterOff.setBackgroundColor(Color.parseColor("#FF0000"));
-                btnwaterOn.setBackgroundColor(Color.parseColor("#D4E157"));
-
                 try {
+
                     StringEntity entity;
-                    // JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("value", "OFF");
+                    jsonObject.put("value", "on");
                     entity = new StringEntity(jsonObject.toString());
-
-
-                    client.post(livePage.this, "https://io.adafruit.com/api/v2/capsProject/feeds/valve/data?x-aio-key=47f1d473707041829ad00da61f99da23", entity, "application/json", new AsyncHttpResponseHandler() {
+                    //This is the post method to set the toggle On and off in the adafruit
+                    client.post(livePage.this, "https://io.adafruit.com/api/v2/capsProject/feeds/valve/data?x-aio-key=f1b3f9d0456d404a8d68e86ee3661b21", entity, "application/json", new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                             System.out.println("Sucess");
                         }
-
                         @Override
                         public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
@@ -387,56 +236,67 @@ public class livePage extends AppCompatActivity {
                     e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (Exception e) {
+                    System.out.println("Error " + e);
                 }
 
+                //This is the timer to set the timer for sometime
+                timer = new CountDownTimer(10000, 1000) {
+                    AsyncHttpClient client = new AsyncHttpClient();
+                    public void onTick(long millisUntilFinished) {
 
+                        System.out.println("seconds remaining: " + millisUntilFinished / 1000);
+                    }
+                    public void onFinish() {
+                        System.out.println("done");
+                        btnwaterOn.setEnabled(true);
+                        try {
+                            StringEntity entity;
+                            jsonObject.put("value", "OFF");
+                            entity = new StringEntity(jsonObject.toString());
+                            //This is the method to post the data in the adafruit cloud
+                            client.post(livePage.this, "https://io.adafruit.com/api/v2/capsProject/feeds/valve/data?x-aio-key=f1b3f9d0456d404a8d68e86ee3661b21", entity, "application/json", new AsyncHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                    System.out.println("Sucess");
+                                    btnwaterOn.setBackgroundColor(Color.parseColor("#FF0000"));
+                                    mgif.setVisibility(View.INVISIBLE);
+                                    mindicator1.setVisibility(View.INVISIBLE);//Setting indicator invisible
+                                    mindicator2.setVisibility(View.VISIBLE);//Setting indicator visible
+                                    mOn.setVisibility(View.INVISIBLE);//Setting indicator off
+                                    mOff.setVisibility(View.VISIBLE);//Setting indicator On
+                                }
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
+                                }
+                            });
+
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                //Here the timer has been set to start stage
+                timer.start();
             }
         });
-
-
-//        //This is onClickListner to return to homepage of application
-//        btnBack.setOnClickListener(new View.OnClickListener() {
-//
-//
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(livePage.this, ActivityTwo.class);
-//                startActivity(intent);
-//
-//
-//
-//
-//
-//            }
-//        });
-
-//        //This is onClickListner to Signout from the application
-//        btnSignout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mAuth.signOut();
-//                toastMessage("Signing Out...");
-//                Intent intent = new Intent(livePage.this, Login.class);
-//                startActivity(intent);
-//            }
-//        });
-
-
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        mauth.addAuthStateListener(mAuthListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
+            mauth.removeAuthStateListener(mAuthListener);
         }
     }
 

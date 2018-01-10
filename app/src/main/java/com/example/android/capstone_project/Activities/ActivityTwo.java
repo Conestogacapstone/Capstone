@@ -19,13 +19,11 @@ import java.util.Calendar;
 
 public class ActivityTwo extends AppCompatActivity {
 
-    AlarmManager alarmManager;
-    private PendingIntent intent_pending;
-
-    private TimePicker reminderTime;
-    private TextView reminder;
-
-    ActivityTwo inst;
+    AlarmManager Manageralarm;
+    private PendingIntent pending;
+    private TimePicker Time;
+    private TextView mreminder;
+    ActivityTwo activity;
     Context context;
 
     @Override
@@ -41,73 +39,62 @@ public class ActivityTwo extends AppCompatActivity {
 
 
         this.context = this;
-
-        reminder = (TextView) findViewById(R.id.reminder);
-
+        mreminder = (TextView) findViewById(R.id.reminder);//getting mreminder text view
         final Intent myIntent = new Intent(this.context, ReminderReceiver.class);
 
-        // Get the alarm manager service
-        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        // Alarm manager service
+        Manageralarm = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        // set the alarm to the time that you picked
-        final Calendar calendar = Calendar.getInstance();
+        // This will set the picked time by the user
+        final Calendar mcal = Calendar.getInstance();
 
-        reminderTime = (TimePicker) findViewById(R.id.alarmTimePicker);
+        Time = (TimePicker) findViewById(R.id.Time);
 
-
-        Button start_alarm = (Button) findViewById(R.id.start_alarm);
+        //This is the set button to reminder
+        Button start_alarm = (Button) findViewById(R.id.start);//Getting start alarm button here
         start_alarm.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.M)
 
             @Override
             public void onClick(View v) {
 
-                calendar.add(Calendar.SECOND, 3);
-
-                final int hour = reminderTime.getCurrentHour();
-                final int minute = reminderTime.getCurrentMinute();
-                ;
-
-
-                calendar.set(Calendar.HOUR_OF_DAY, reminderTime.getCurrentHour());
-                calendar.set(Calendar.MINUTE, reminderTime.getCurrentMinute());
-
+                mcal.add(Calendar.SECOND, 3);
+                final int hour = Time.getCurrentHour();
+                final int minute = Time.getCurrentMinute();
+                mcal.set(Calendar.HOUR_OF_DAY, Time.getCurrentHour());
+                mcal.set(Calendar.MINUTE, Time.getCurrentMinute());
                 myIntent.putExtra("extra", "yes");
-                intent_pending = PendingIntent.getBroadcast(ActivityTwo.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), intent_pending);
-
+                pending = PendingIntent.getBroadcast(ActivityTwo.this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                Manageralarm.set(AlarmManager.RTC_WAKEUP, mcal.getTimeInMillis(), pending);
 
                 // Setting alarm text
                 setAlarmText("Reminder Set to " + hour + ":" + minute);
             }
-
         });
 
-        Button stop_alarm = (Button) findViewById(R.id.stop_alarm);
+        //This is the stop button to reminder
+        Button stop_alarm = (Button) findViewById(R.id.stop);
         stop_alarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 myIntent.putExtra("extra", "no");
                 sendBroadcast(myIntent);
-
                 setAlarmText("Reminder Reset Is Done");
-
             }
         });
-
     }
 
+    //Here the alarm is been set to text field
     public void setAlarmText(String alarmText) {
-        reminder.setText(alarmText);
+        mreminder.setText(alarmText);
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
-        inst = this;
+        activity = this;
     }
 
     @Override

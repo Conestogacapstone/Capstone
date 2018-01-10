@@ -21,28 +21,28 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class viewUser extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authListener;
-    private FirebaseAuth auth;
+    private FirebaseAuth mauth;
     private ImageView imageView;
     private TextView email;
     private TextView name;
-    private View btnLogOut;
-    private Button btnBack;
+    private View LogOut_button;
+    private Button Back_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_user);
 
-        name = (TextView) findViewById(R.id.displayed_name);
-        email = (TextView) findViewById(R.id.email_field);
-        btnLogOut = findViewById(R.id.logout);
-        imageView = (ImageView) findViewById(R.id.user_photo);
-        btnBack =(Button) findViewById(R.id.back);
+        name = (TextView) findViewById(R.id.displayed_name);//Getting name from textfield
+        email = (TextView) findViewById(R.id.email);//Getting email from textfield
+        LogOut_button = findViewById(R.id.logout);//Getting logout button
+        imageView = (ImageView) findViewById(R.id.logo);//Getting imageview
+        Back_button =(Button) findViewById(R.id.back);//Getting back button
 
         //get firebase auth instance
-        auth = FirebaseAuth.getInstance();
+        mauth = FirebaseAuth.getInstance();
 
-        //get current user
+        //getting current user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         setDataToView(user);
 
@@ -70,15 +70,15 @@ public class viewUser extends AppCompatActivity {
         };
 
         //Signing out
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
+        LogOut_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                auth.signOut();
+                mauth.signOut();
             }
         });
 
         //Back button
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        Back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(viewUser.this, myProfile.class);
@@ -87,6 +87,7 @@ public class viewUser extends AppCompatActivity {
         });
     }
 
+    //This method will set the content to the view
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
         email.setText("User Email: " + user.getEmail());
@@ -96,14 +97,14 @@ public class viewUser extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        auth.addAuthStateListener(authListener);
+        mauth.addAuthStateListener(authListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         if (authListener != null) {
-            auth.removeAuthStateListener(authListener);
+            mauth.removeAuthStateListener(authListener);
         }
     }
     }

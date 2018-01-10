@@ -25,8 +25,9 @@ public class ActivityThree extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_three);
 
+        //This is the view
+        setContentView(R.layout.activity_three);
 
         //Bottom Navigation Bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
@@ -48,18 +49,14 @@ public class ActivityThree extends AppCompatActivity {
 
                 } else if (i == R.id.settings) {
                 }
-
-
                 return false;
             }
         });
         //String array to store menu items
         String[] menuItems = {"Edit Profile", "About"};
 
-
         //List view created
         final ListView listView = (ListView) findViewById(R.id.mainMenu);
-
 
         //Array adapter to hold listview
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
@@ -70,7 +67,6 @@ public class ActivityThree extends AppCompatActivity {
         );
 
         listView.setAdapter(listViewAdapter);
-
 
         //List view conditions
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,14 +81,9 @@ public class ActivityThree extends AppCompatActivity {
                 } else if (position == 1) {
                     Intent intent2 = new Intent(ActivityThree.this, About.class);
                     startActivity(intent2);
-
-
                 }
-
-
             }
         });
 
     }
-
 }

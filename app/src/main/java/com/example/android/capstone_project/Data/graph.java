@@ -42,15 +42,12 @@ public class graph extends AppCompatActivity {
 
     //add Firebase Database stuff
     private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mauth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
-    private ListView mlistview;
-    private Button mdel;
     private GraphView mgraph;
-    private ArrayList<String> mHistory = new ArrayList<>();
-    private ArrayList<Integer> xAxis = new ArrayList<>();
-    private ArrayList<Integer> yAxis = new ArrayList<>();
+    private ArrayList<Integer> xAxis = new ArrayList<>();// Array list for Xaxis
+    private ArrayList<Integer> yAxis = new ArrayList<>();// Array list for Yaxis
 
 
     String userID;
@@ -62,10 +59,12 @@ public class graph extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-        mAuth = FirebaseAuth.getInstance();
+        //Firesbase instance
+        mauth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-        FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseUser user = mauth.getCurrentUser();
+        //It will get the current user
         userID = user.getUid();
         mgraph = (GraphView) findViewById(R.id.graph);
 
@@ -81,17 +80,14 @@ public class graph extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     toastMessage("Successfully signed in with: " + user.getEmail());
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
                     toastMessage("Successfully signed out.");
                 }
                 // ...
             }
         };
-
 
         myRef.child("users").child(userID).child("History").addValueEventListener(new ValueEventListener() {
             @Override
@@ -110,19 +106,11 @@ public class graph extends AppCompatActivity {
                     String humidity = sta.substring(40, 45);
                     System.out.println("humidity level" + humidity);
 
-
                     try {
-
-
                         a = NumberFormat.getInstance().parse(humidity).intValue();
-
-                        xAxis.add(a);
-
-
+                        xAxis.add(a);//Here data is added to xAxis
                         b = NumberFormat.getInstance().parse(part1).intValue();
-                        yAxis.add(b);
-
-
+                        yAxis.add(b);//Here daat is added to yAxis
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -133,22 +121,15 @@ public class graph extends AppCompatActivity {
                         DataPoint v = new DataPoint(xAxis.get(i), yAxis.get(i));
                         values[i] = v;
                     }
-
-
                     series = new PointsGraphSeries<DataPoint>(values);
-
-
                 }
                 createScatterPlot();
 
             }
 
 
+            //This method will get the value of X and Y axis
             private void createScatterPlot() {
-
-                Log.d(TAG, "createScatterPlot: Creating scatter plot.");
-
-
                 series.setOnDataPointTapListener(new OnDataPointTapListener() {
                     @Override
                     public void onTap(Series series, DataPointInterface dataPointInterface) {
@@ -157,13 +138,11 @@ public class graph extends AppCompatActivity {
 
                         //declare new series
                         onClickSeries = new PointsGraphSeries<>();
-
                         onClickSeries.appendData(new DataPoint(dataPointInterface.getX(), dataPointInterface.getY()), true, 100);
-
                         onClickSeries.setShape(PointsGraphSeries.Shape.TRIANGLE);
                         onClickSeries.setColor(Color.RED);
                         onClickSeries.setSize(25f);
-                        // mgraph.addSeries(onClickSeries);
+
 
                         double date = dataPointInterface.getY();
                         String date1 = Double.toString(date);
@@ -177,27 +156,19 @@ public class graph extends AppCompatActivity {
                     }
                 });
 
-
-                series.setShape(PointsGraphSeries.Shape.TRIANGLE);
-                series.setColor(Color.GREEN);
+                series.setShape(PointsGraphSeries.Shape.TRIANGLE);//This will set the shape of data to triangle
+                series.setColor(Color.GREEN);//This will set the data to green
 
                 // set manual X bounds
                 mgraph.getViewport().setYAxisBoundsManual(true);
-                mgraph.getViewport().setMinY(0);
-                mgraph.getViewport().setMaxY(30);
-
+                mgraph.getViewport().setMinY(0);//It will set the Y axis to minimum value of 0
+                mgraph.getViewport().setMaxY(30);//It will set the Y axis to maximum value of 30
                 mgraph.getViewport().setXAxisBoundsManual(true);
-                mgraph.getViewport().setMinX(0);
-                mgraph.getViewport().setMaxX(100);
-
-
+                mgraph.getViewport().setMinX(0);//It will set the X axis to minimum value of 0
+                mgraph.getViewport().setMaxX(100);//It will set the X axis to maximum value of 100
                 mgraph.getViewport().setScrollable(true); // enables horizontal scrolling
-
                 mgraph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
-
-
                 mgraph.addSeries(series);
-
 
             }
 
@@ -208,10 +179,7 @@ public class graph extends AppCompatActivity {
                 // ...
             }
         });
-
-
     }
-
 
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

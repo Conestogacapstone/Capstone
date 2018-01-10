@@ -43,28 +43,31 @@ public class history extends AppCompatActivity {
 
     //add Firebase Database stuff
     private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mauth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
-   private ListView mlistview;
-   private Button mdel;
-   private ArrayList<String> mHistory = new ArrayList<>();
+    private ListView mlistview;
+    private Button mdel;
+    private ArrayList<String> mHistory = new ArrayList<>();//This is the array list to add history
 
     String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //This is the view
         setContentView(R.layout.activity_history);
 
-        mAuth = FirebaseAuth.getInstance();
+        //This is the instance of Firebase
+        mauth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-        FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseUser user = mauth.getCurrentUser();//This will get the current user from the database
         userID = user.getUid();
 
-         mlistview = (ListView) findViewById(R.id.historyList);
-        mdel = (Button) findViewById(R.id.del);
+        mlistview = (ListView) findViewById(R.id.historyList);//Getting list here
+        mdel = (Button) findViewById(R.id.del);//Getting delete button here
 
         // Add back button
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -78,102 +81,59 @@ public class history extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     toastMessage("Successfully signed in with: " + user.getEmail());
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
                     toastMessage("Successfully signed out.");
                 }
-                // ...
+
             }
         };
 
 
-        final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,mHistory);
+        //This is the list adapter used for array
+        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mHistory);
         mlistview.setAdapter(adapter);
-        // System.out.println(historyObject);
         myRef.child("users").child(userID).child("History").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 // Iterable used for "For loop" for any data type
-                Iterable<DataSnapshot> dataSnapshots =  dataSnapshot.getChildren();
+                Iterable<DataSnapshot> dataSnapshots = dataSnapshot.getChildren();
                 //For loop to get all data
                 for (DataSnapshot ds : dataSnapshots) {
                     //getting value to a string 'sta'
                     String sta = ds.getValue().toString();
-                    String date=sta.substring(0,10);
-                    String del=sta.substring(0,2);
+                    String date = sta.substring(0, 10);
+                    String del = sta.substring(0, 2);
                     int del1 = Integer.parseInt(del);
-                    System.out.println("delete data"+ del);
-                    System.out.println("date"+date);
-                    String time=sta.substring(10,20);
-                    System.out.println(time);
-                    String humidity=sta.substring(23,45);
-                  //  System.out.println(sta);
+                    String time = sta.substring(10, 20);
+                    String humidity = sta.substring(23, 45);
 
-                    String [] parts = sta.split("-");
-                    String part1=parts[0];
 
-                    //Array list used
-                  //  ArrayList<String> array  = new ArrayList<>();
-                    mHistory.add("Date-"+date+"             "+humidity+"\n"+time+"\n");
-                   // mHistory.add(sta1);
-                   // System.out.println(array);
+                    //Here date, humidity and time are added to list view
+                    mHistory.add("Date-" + date + "             " + humidity + "\n" + time + "\n");
                     adapter.notifyDataSetChanged();
-
                     mlistview.setAdapter(adapter);
 
 
-
-                    if(del1 == 01)
-                    {
+                    //This condition will delete whole data on every first day of month
+                    if (del1 == 01) {
                         dataSnapshot.getRef().removeValue();
                         finish();
                         startActivity(getIntent());
-
-
                     }
-
-
                 }
 
-
+                //This method will delete data from database
                 mdel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dataSnapshot.getRef().removeValue();
                         finish();
                         startActivity(getIntent());
-
-
-
-
                     }
-
                 });
-
-//                Date cutoff = new Date();
-//                Query oldItems = myRef.orderByChild("timestamp").endAt(String.valueOf(cutoff));
-//                oldItems.addListenerForSingleValueEvent(new ValueEventListener() {
-//                    // Iterable used for "For loop" for any data type
-//                    Iterable<DataSnapshot> dataSnapshots =  dataSnapshot.getChildren();
-//                    @Override
-//                    public void onDataChange(DataSnapshot snapshot) {
-//                        for (DataSnapshot ds : dataSnapshots) {
-//                            dataSnapshot.getRef().removeValue();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                        throw databaseError.toException();
-//                    }
-//                });
-
-
             }
-
 
 
             @Override
@@ -184,56 +144,7 @@ public class history extends AppCompatActivity {
             }
         });
 
-
-//
-//       // myRef.child()
-//        mdel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                myRef.child("users").child(userID).child("History").addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        // Iterable used for "For loop" for any data type
-//                       // Iterable<DataSnapshot> dataSnapshots =  dataSnapshot.getChildren();
-//                        //For loop to get all data
-//                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//
-//
-//                            ds.getRef().removeValue();
-//                            adapter.notifyDataSetChanged();
-//
-//
-//                        }
-//
-//                    }
-//
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                        // Getting Post failed, log a message
-//                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-//                        // ...
-//                    }
-//                });
-//
-//            }
-//        });
-
-
-
-
     }
-
-
-
-
-// Read from the database
-
-
-
-
-
-
 
 
     private void toastMessage(String message) {

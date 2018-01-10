@@ -11,9 +11,9 @@ public class ReminderReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String state = intent.getExtras().getString("extra");
 
-        Intent serviceIntent = new Intent(context,start_ringtone.class);
-        serviceIntent.putExtra("extra", state);
+        Intent intent1 = new Intent(context, start_ringtone.class);
+        intent1.putExtra("extra", state);
 
-        context.startService(serviceIntent);
+        context.startService(intent1);
     }
 }

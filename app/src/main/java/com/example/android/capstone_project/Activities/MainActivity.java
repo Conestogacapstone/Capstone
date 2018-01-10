@@ -16,21 +16,18 @@ import com.example.android.capstone_project.R;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "ActivityTwo";
-
     private Button btnlive;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //this is the view
         setContentView(R.layout.activity_main);
-
 
         //hide action bar
         getSupportActionBar().hide();
 
         btnlive = (Button) findViewById(R.id.livestreamBtn);
-
 
         //Bottom Navigation Bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
@@ -44,35 +41,23 @@ public class MainActivity extends AppCompatActivity {
                 int i = item.getItemId();
                 if (i == R.id.home) {
                 } else if (i == R.id.myPlants) {
-
-
                     Intent intent2 = new Intent(MainActivity.this, ActivityOne.class);
                     startActivity(intent2);
-
-
                 } else if (i == R.id.settings) {
                     Intent intent3 = new Intent(MainActivity.this, ActivityThree.class);
                     startActivity(intent3);
-
                 }
-
-
                 return false;
             }
         });
 
         //Start Button to move to livepage
         btnlive.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, livePage.class);
                 startActivity(intent);
             }
         });
-
     }
-
-
 }

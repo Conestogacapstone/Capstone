@@ -17,16 +17,14 @@ import com.example.android.capstone_project.R;
 
 
 public class ActivityOne extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //This is the view
         setContentView(R.layout.activity_one);
 
-
-
-
+        //This is the bottom navigation bar method
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
@@ -44,19 +42,19 @@ public class ActivityOne extends AppCompatActivity {
                 } else if (i == R.id.settings) {
                     Intent intent3 = new Intent(ActivityOne.this, ActivityThree.class);
                     startActivity(intent3);
-
                 }
-
-
                 return false;
             }
         });
 
-        String[] menuItems = {"Adromischus cooperi", "Aeonium", "Aloe Vera","Avocado","Basil","Black orchid","Bush lily","Cacao","Cardamom","Cattleya-orchid","Lavender lady",
-                "Mophead","Petunia calibrachoa","Rose","Viola",""};
+        //A string array to store list items
+        String[] menuItems = {"Adromischus cooperi", "Aeonium", "Aloe Vera", "Avocado", "Basil", "Black orchid", "Bush lily", "Cacao", "Cardamom", "Cattleya-orchid", "Lavender lady",
+                "Mophead", "Petunia calibrachoa", "Rose", "Viola", ""};
 
+        //this is the list view
         ListView listView = (ListView) findViewById(R.id.mainMenu);
 
+        //an array list adapter used
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
                 ActivityOne.this,
                 android.R.layout.simple_list_item_1,
@@ -65,6 +63,7 @@ public class ActivityOne extends AppCompatActivity {
 
         listView.setAdapter(listViewAdapter);
 
+        //Setting the items in list view
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,74 +77,59 @@ public class ActivityOne extends AppCompatActivity {
                     Intent intent2 = new Intent(ActivityOne.this, plant2.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 2) {
+                } else if (position == 2) {
                     Intent intent2 = new Intent(ActivityOne.this, plant3.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 3) {
+                } else if (position == 3) {
                     Intent intent2 = new Intent(ActivityOne.this, plant4.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 4) {
+                } else if (position == 4) {
                     Intent intent2 = new Intent(ActivityOne.this, plant5.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 5) {
+                } else if (position == 5) {
                     Intent intent2 = new Intent(ActivityOne.this, plant6.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 6) {
+                } else if (position == 6) {
                     Intent intent2 = new Intent(ActivityOne.this, plant7.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 7) {
+                } else if (position == 7) {
                     Intent intent2 = new Intent(ActivityOne.this, plant8.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 8) {
+                } else if (position == 8) {
                     Intent intent2 = new Intent(ActivityOne.this, plant9.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 9) {
+                } else if (position == 9) {
                     Intent intent2 = new Intent(ActivityOne.this, plant10.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 10) {
+                } else if (position == 10) {
                     Intent intent2 = new Intent(ActivityOne.this, plant11.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 11) {
+                } else if (position == 11) {
                     Intent intent2 = new Intent(ActivityOne.this, plant12.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 12) {
+                } else if (position == 12) {
                     Intent intent2 = new Intent(ActivityOne.this, plant13.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 13) {
+                } else if (position == 13) {
                     Intent intent2 = new Intent(ActivityOne.this, plant14.class);
                     startActivity(intent2);
 
-                }
-                else if (position == 14) {
+                } else if (position == 14) {
                     Intent intent2 = new Intent(ActivityOne.this, plant15.class);
                     startActivity(intent2);
 
                 }
-
-
             }
         });
     }
